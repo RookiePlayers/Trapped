@@ -1,0 +1,82 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14-Oct-2018, 16:53:26
+    Author     : Ali
+*/
+.page{
+    -fx-background-color:rgb(32, 22, 9);
+    -fx-border-color:rgb(26, 21, 11);
+    -fx-border-width:5px;
+}
+.grids{
+    -fx-background-color:rgba(110, 68, 19, 0.849);
+}
+
+.selectedGrid{
+    -fx-border-color:lightblue;
+    -fx-border-width:5px;
+    -fx-background-color:rgba(110, 68, 19, 0.849);
+
+    
+
+}
+.selectedGrid:hover
+{
+    -fx-border-color:rgb(88, 193, 228);
+    -fx-border-width:5px;
+    
+}
+.unselectedGrid:hover{
+    
+    -fx-border-color:rgb(88, 193, 228);
+    -fx-border-width:5px;
+}
+.unselectedGrid{
+    -fx-background-color:rgba(110, 68, 19, 0.849);
+
+    -fx-border-color:transparent;
+    -fx-border-width:0px;
+}
+.header{
+    -fx-font-family:Papyrus;
+    -fx-text-fill:rgb(122, 82, 28);
+    -fx-font-size:20px;
+}
+.slotsLabel{
+    -fx-font-family: Papyrus;
+    -fx-text-fill:rgb(151, 112, 38);
+    -fx-font-size:15px;
+}
+.use{
+    -fx-background-color:rgb(50, 184, 38);
+    -fx-background-radius:50;
+    -fx-font-family:Papyrus;
+    -fx-font-size:16px;
+    -fx-text-fill:rgb(250, 250, 250);
+}
+.itemName{
+    -fx-font-family: Papyrus;
+    -fx-text-fill:rgba(255, 255, 255, 0.699);
+    -fx-font-size:12px;
+}
+.use:hover{
+    -fx-background-color:rgb(109, 240, 97);
+    -fx-background-radius:50;
+    -fx-text-fill:rgb(49, 48, 48);
+}
+.drop{
+    -fx-background-color:rgb(165, 35, 35);
+    -fx-background-radius:50;
+    -fx-font-family:Papyrus;
+    -fx-font-size:16px;
+    -fx-text-fill:rgb(250, 250, 250);
+}
+.drop:hover{
+    -fx-background-color:rgb(255, 61, 61);
+    -fx-background-radius:50;
+    -fx-text-fill:white;
+}

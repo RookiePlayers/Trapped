@@ -1,0 +1,15 @@
+.inventoryBag:hover{
+    -fx-background-color: #fcfade;
+    -fx-scale-y: 1.1;
+    -fx-background-radius:50;
+    -fx-border-color:black;
+    -fx-border-width:3px;
+
+}
+.inventoryBag{
+    -fx-background-color:transparent;
+       -fx-border-color:black;
+       -fx-border-width:3px;
+       -fx-border-radius:50;
+     
+}

@@ -1,4 +1,4 @@
-package Main;//import java.-classpath.Trapped.Main.trapped;
+package Main;//import java.-classpath.Trapped.Main.Trapped;
 //import java.-classpath.trappedGame.simpleMaze;
 
 import Leaderboard.UI.LeaderboardGUI;
@@ -23,13 +23,13 @@ import Maze.simpleMaze2;
 import java.util.ArrayList;
 
 
-public class trapped extends Application
+public class Trapped extends Stage
 {
 
 	Scene scene,scene2,scene3;
 
-	@Override	//starts method in application class
-	public void start(Stage primaryStage)
+		//starts method in application class
+	public Trapped()
 	{
 		//scenes
 
@@ -93,21 +93,21 @@ public class trapped extends Application
 		b1.setMinWidth(120);
 		b1.setMinHeight(20);
 		hbox.getChildren().addAll(b1);
-		//b1.setOnAction(e -> primaryStage.setScene(scene2));
+		//b1.setOnAction(e -> setScene(scene2));
 		b1.setOnAction(e -> {
-			primaryStage.close();
+			close();
 			MazeMenu mazemenu=new MazeMenu(inventory,MAZETYPE.SIMPLE);
 
 
-			mazemenu.getExit().setOnAction(exit->{mazemenu.close();primaryStage.close();});
-			mazemenu.getBack().setOnAction(exit->{mazemenu.close();primaryStage.show();});
+			mazemenu.getExit().setOnAction(exit->{mazemenu.close();close();});
+			mazemenu.getBack().setOnAction(exit->{mazemenu.close();show();});
 			mazemenu.showAndWait();
 
 			//newGame.launch(simpleMaze.class);
 			//Platform.exit();
 			//this.dispose();
 			//try{
-				//primaryStage.setScene(newGame.startMaze(primaryStage));
+				//setScene(newGame.startMaze(primaryStage));
 			//}catch(Exception er)
 			//{ System.out.println("ERROR");}
 		});
@@ -154,7 +154,7 @@ public class trapped extends Application
 		b3.setMinWidth(120);
 		b3.setMinHeight(20);
 		hbox4.getChildren().add(b3);
-		b3.setOnAction(e -> primaryStage.setScene(scene));
+		b3.setOnAction(e -> setScene(scene));
 
 		//Scene 3 Layout
         VBox vbox3 = new VBox();
@@ -174,7 +174,7 @@ public class trapped extends Application
 		b4.setMinWidth(120);
 		b4.setMinHeight(20);
 		hbox5.getChildren().add(b4);
-		b4.setOnAction(e -> primaryStage.setScene(scene));
+		b4.setOnAction(e -> setScene(scene));
 
 
 
@@ -182,17 +182,15 @@ public class trapped extends Application
 		Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
 
-		primaryStage.setX(bounds.getMinX());
-		primaryStage.setY(bounds.getMinY());
-		primaryStage.setWidth(bounds.getWidth());
-		primaryStage.setHeight(bounds.getHeight());
-		primaryStage.setTitle("Trapped"); // Set the stage title
-		primaryStage.setScene(scene); // Place the scene in the stage
-		primaryStage.show(); // Display the stage
+		setX(bounds.getMinX());
+		setY(bounds.getMinY());
+		setWidth(bounds.getWidth());
+		setHeight(bounds.getHeight());
+		setTitle("Trapped"); // Set the stage title
+		setScene(scene); // Place the scene in the stage
+		show(); // Display the stage
 
 	}
 
-	public static void main(String[] args) { 
-		launch(args);
-  }
+	
 }

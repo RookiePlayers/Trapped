@@ -7,8 +7,11 @@ import Maze.*;
 import Maze.MazeMenu;
 import inventory.Models.*;
 import javafx.application.*;
+import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -88,7 +91,7 @@ public class Trapped extends Stage
 		
 		//Scene 1 Buttons
 
-        Button b1 = new Button("Play Simple Maze");
+        Button b1 = new Button("Play");
        	b1.setStyle("-fx-border-color: blue;");
 		b1.setMinWidth(120);
 		b1.setMinHeight(20);
@@ -96,7 +99,10 @@ public class Trapped extends Stage
 		//b1.setOnAction(e -> setScene(scene2));
 		b1.setOnAction(e -> {
 			close();
-			MazeMenu mazemenu=new MazeMenu(inventory,MAZETYPE.SIMPLE);
+			GameType gameMode=new GameType(inventory);
+			gameMode.getMainMenu().setOnAction(exit->{gameMode.close();show();});
+			gameMode.showAndWait();
+			/*MazeMenu mazemenu=new MazeMenu(inventory,MAZETYPE.SIMPLE);
 
 
 			mazemenu.getExit().setOnAction(exit->{mazemenu.close();close();});
@@ -109,7 +115,7 @@ public class Trapped extends Stage
 			//try{
 				//setScene(newGame.startMaze(primaryStage));
 			//}catch(Exception er)
-			//{ System.out.println("ERROR");}
+			//{ System.out.println("ERROR");}*/
 		});
 
 		//XzibitVideo programVideo = new XzibitVideo();
@@ -193,4 +199,140 @@ public class Trapped extends Stage
 	}
 
 	
+}
+class GameType extends Stage
+{
+	private Button mainMenu=new Button("Main Menu");
+	private MAZETYPE mazetype;
+	private GAMEMODES gamemodes;
+	private Inventory inventory;
+
+	public GAMEMODES getGamemodes() {
+		return gamemodes;
+	}
+
+	public void setGamemodes(GAMEMODES gamemodes) {
+		this.gamemodes = gamemodes;
+	}
+
+	public MAZETYPE getMazetype() {
+		return mazetype;
+	}
+
+	public void setMazetype(MAZETYPE mazetype) {
+		this.mazetype = mazetype;
+	}
+
+	public Button getMainMenu() {
+		return mainMenu;
+	}
+
+	public void setMainMenu(Button mainMenu) {
+		this.mainMenu = mainMenu;
+	}
+
+	public GameType(Inventory inventory) {
+
+		this.inventory=inventory;
+		Screen screen = Screen.getPrimary();
+		Rectangle2D bounds = screen.getVisualBounds();
+		setScene(gameType());
+		setX(bounds.getMinX());
+		setY(bounds.getMinY());
+		setWidth(bounds.getWidth());
+		setHeight(bounds.getHeight());
+		setTitle("Game Mode"); // S
+	}
+	public Scene gameType()
+	{
+
+
+		BorderPane borderPane=new BorderPane();
+		VBox box=new VBox();
+
+		Button classicMaze=new Button("CLASSIC");
+		Button timeTrial=new Button("TIME TRIAL");
+		Button itemHunter=new Button("ItemHunter");
+
+		classicMaze.setOnAction(
+				e->{
+					setScene(gameDifficulty());
+					gamemodes=GAMEMODES.CLASSIC;
+				}
+		);
+		timeTrial.setOnAction(
+				e->{
+					setScene(gameDifficulty());
+					gamemodes=GAMEMODES.TIMECHALLENGE;
+				}
+		);
+		itemHunter.setOnAction(
+				e->{
+					setScene(gameDifficulty());
+					gamemodes=GAMEMODES.ITEMHUNTER;
+				}
+		);
+
+		box.getChildren().addAll(classicMaze,timeTrial,itemHunter,mainMenu);
+		box.setAlignment(Pos.CENTER);
+		box.setSpacing(15);
+		borderPane.setCenter(box);
+
+
+
+		Scene sc=new Scene(borderPane);
+
+		return sc;
+	}
+	public Scene gameDifficulty()
+	{
+
+		BorderPane borderPane=new BorderPane();
+		VBox box=new VBox();
+		Button hardMaze=new Button("Hard");
+		Button intermediateMaze=new Button("Intermediate");
+		Button easyMaze=new Button("Easy");
+
+		hardMaze.setOnAction(e->{
+			mazetype=MAZETYPE.HARD;
+			MazeMenu mazemenu=new MazeMenu(inventory,mazetype,gamemodes);
+
+
+			mazemenu.getExit().setOnAction(exit->{mazemenu.close();setScene(gameType());});
+			mazemenu.getBack().setOnAction(exit->{mazemenu.close();show();});
+			mazemenu.showAndWait();
+
+		});
+		intermediateMaze.setOnAction(e->{
+			mazetype=MAZETYPE.MEDIUM;
+			MazeMenu mazemenu=new MazeMenu(inventory,mazetype,gamemodes);
+
+
+			mazemenu.getExit().setOnAction(exit->{mazemenu.close();setScene(gameType());});
+			mazemenu.getBack().setOnAction(exit->{mazemenu.close();show();});
+			mazemenu.showAndWait();
+		});
+		easyMaze.setOnAction(e->{
+			mazetype=MAZETYPE.SIMPLE;
+			MazeMenu mazemenu=new MazeMenu(inventory,mazetype,gamemodes);
+
+
+			mazemenu.getExit().setOnAction(exit->{mazemenu.close();setScene(gameType());});
+			mazemenu.getBack().setOnAction(exit->{mazemenu.close();show();});
+			mazemenu.showAndWait();
+		});
+
+
+		Button backBtn=new Button("BACK");
+		backBtn.setOnAction(e->{
+			setScene(gameType());
+		});
+		box.getChildren().addAll(hardMaze,intermediateMaze,easyMaze,backBtn);
+		box.setAlignment(Pos.CENTER);
+		box.setSpacing(15);
+		borderPane.setCenter(box);
+
+		Scene sc=new Scene(borderPane);
+		return sc;
+	}
 }

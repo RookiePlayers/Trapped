@@ -1,5 +1,6 @@
 package Maze;
 
+import Interface.MazeInterface;
 import inventory.Models.HealthPotion;
 import inventory.Models.Inventory;
 import inventory.Models.Item;
@@ -27,7 +28,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public abstract class Maze implements  Runnable{
+public abstract class Maze implements  Runnable, MazeInterface {
     protected Player player;
     protected String title;
     protected static final int KEYBOARD_MOVEMENT_DELTA = 700;
@@ -140,7 +141,7 @@ public abstract class Maze implements  Runnable{
 
     }
     protected abstract TranslateTransition createTranslateTransition(final ImageView image);
-    protected Item itemGenerator()
+    public Item itemGenerator()
     {
         for(Item item:inventory.getItems())
         {

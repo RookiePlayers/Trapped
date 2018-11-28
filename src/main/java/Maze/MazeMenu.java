@@ -48,8 +48,9 @@ public class MazeMenu extends Stage  {
         this.items = items;
     }
 
-    public MazeMenu(Inventory inventory,MAZETYPE mazeType)
+    public MazeMenu(Inventory inventory,MAZETYPE mazeType,GAMEMODES gamemodes)
     {
+        System.out.println("Playing "+gamemodes+" on "+mazeType+" Dificulty");
         Maze maze;
         this.inventory=inventory;
         Inventory startOffInventory=new Inventory();

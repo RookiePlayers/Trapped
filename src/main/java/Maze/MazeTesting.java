@@ -19,7 +19,7 @@ public class MazeTesting extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         MazeFactory mazeFactory=new MazeFactory();
-        Maze maze=mazeFactory.makeMaze(MAZETYPE.SIMPLE);
+     //   Maze maze=mazeFactory.makeMaze(MAZETYPE.SIMPLE);
         primaryStage=new Stage();
         Group root=new Group();
         Scene sc=new Scene(root,500,500);

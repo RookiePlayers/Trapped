@@ -51,7 +51,7 @@ public class MazeMenu extends Stage  {
     public MazeMenu(Inventory inventory,MAZETYPE mazeType,GAMEMODES gamemodes)
     {
         System.out.println("Playing "+gamemodes+" on "+mazeType+" Dificulty");
-        Maze maze;
+        MazeInterface maze;
         this.inventory=inventory;
         Inventory startOffInventory=new Inventory();
         Player player=new Player("Player"+((int)(Math.random()*(1000-1))),"/Images/hero.png",100,startOffInventory);
@@ -64,9 +64,9 @@ public class MazeMenu extends Stage  {
         top=new HBox();
 
         MazeFactory mazeFactory=new MazeFactory();
-        maze=mazeFactory.makeMaze(mazeType);
-        setTitle(maze.getTitle());
-        title=maze.getTitle();
+        maze=mazeFactory.makeMaze(mazeType,gamemodes);
+       // setTitle(maze.getTitle());
+        //title=maze.getTitle();
         ((HBox) top).getChildren().addAll(exit,new Label(title),back);
 
         back.setAlignment(Pos.TOP_LEFT);
@@ -88,8 +88,7 @@ public class MazeMenu extends Stage  {
         middle=maze.initMaze(scene,inventoryUI,invLabel,item,new Player("olllie","/Images/hero.png",0,inventory),null,inventory);
     invLabel.setText(inventoryUI.getItemCount()+"");
 
-    Thread mazeThread=new Thread(maze);
-    mazeThread.start();
+
 
 
         borderPane.setTop(top);

@@ -11,7 +11,7 @@ import javafx.scene.layout.StackPane;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-enum TILETYPE{T1,T2,T3,T4,T5,T6,T7,T8,T9,BLOCKED}
+enum TILETYPE{T1,T2,T3,T4,T5,T6,T7,T8,T9,GOAL,GOALA,GOALB,BLOCKED}
 public class Tile extends StackPane {
     //private Item item;
     private Map<String,Tile> exits=new HashMap<>();
@@ -132,6 +132,10 @@ public class Tile extends StackPane {
         else if(east==null&&north==null&&west!=null&&south!=null)
         {
             this.tileType=TILETYPE.T9;
+        }
+        else if(east!=null&&west!=null&&north==null&&south==null)
+        {
+            this.tileType=TILETYPE.GOAL;
         }
         original_TileType=tileType;
     }

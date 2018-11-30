@@ -1,16 +1,55 @@
 package Maze;
 
+import Interface.MazeInterface;
+
 public class MazeFactory {
-    public Maze makeMaze(MAZETYPE mazeType)
+    public MazeInterface makeMaze(MAZETYPE mazeType,GAMEMODES gameMode)
     {
 
-        Maze maze=null;
+        MazeInterface maze=null;
         switch(mazeType)
         {
-            case SIMPLE: maze=new SimpleMaze();break;
-            case MEDIUM: maze=new MediumMaze();break;
-            case HARD: maze=new HardMaze();break;
+            case SIMPLE: switch(gameMode){
+                case CLASSIC:{
+                    SimpleMaze style=new SimpleMaze();
+                    ClassicMazeDecorator game=new ClassicMazeDecorator(style);
+                    maze=game;
+                    Thread mazeThread=new Thread(style);
+                    mazeThread.start();
+                    Thread mazeThread2=new Thread(game);
+                    mazeThread2.start();
+
+                }break;
+                default:break;
+            }break;
+            case MEDIUM: switch(gameMode){
+                case CLASSIC: {
+                    SimpleMaze style=new SimpleMaze();
+                    ClassicMazeDecorator game=new ClassicMazeDecorator(style);
+                    maze=game;
+                    Thread mazeThread=new Thread(style);
+                    mazeThread.start();
+                    Thread mazeThread2=new Thread(game);
+                    mazeThread2.start();
+
+                }break;
+                default:break;
+            }break;
+            case HARD: switch(gameMode){
+                case CLASSIC: {
+                        SimpleMaze style=new SimpleMaze();
+                    ClassicMazeDecorator game=new ClassicMazeDecorator(style);
+                    maze=game;
+                    Thread mazeThread=new Thread(style);
+                    mazeThread.start();
+                    Thread mazeThread2=new Thread(game);
+                    mazeThread2.start();
+
+                }break;
+                default:break;
+            }break;
         }
+
         return maze;
     }
 }

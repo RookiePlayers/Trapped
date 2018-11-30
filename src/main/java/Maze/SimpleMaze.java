@@ -1,5 +1,6 @@
 package Maze;
 
+import Interface.MazeInterface;
 import inventory.Models.Door;
 import inventory.Models.KeyItem;
 import inventory.UI.InventoryUI;
@@ -20,8 +21,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class SimpleMaze extends Maze {
-private Tile a,b,c,d,e,f,g,h,i,j,k,nextTile;
-    private boolean gameOver;
+private Tile a,b,c,d,e,f,g,h,i,j,k,exit,nextTile;
+
 
     @Override
 public void setup()
@@ -30,6 +31,7 @@ public void setup()
     System.out.println("setting...");
     a=mazeImage;
     currentTile=a;
+
     System.out.println(invLabel.getText());
 
     b=new Tile("maze5.png","b");
@@ -41,7 +43,9 @@ public void setup()
     i=new Tile("maze7.png","h");
     j=new Tile("maze8.png","i");
     h=new Tile("maze2.png","j");
-    k=new Tile("exitRight.png","Goal");
+    k=new Tile("exitRight.png","k");
+    exit=new Tile("youWin.png","Goal");
+
 
     a.setExits(c,d,j,b);
     b.setExits(e,a,null,f);
@@ -53,6 +57,8 @@ public void setup()
     i.setExits(null,null,null,h);
     h.setExits(null,i,e,k);
     j.setExits(a,null,null,null);
+    k.setExits(null,h,null,exit);
+    exit.setTileType(TILETYPE.GOALA);
 
     //Add items
 
@@ -275,13 +281,21 @@ public void setup()
         return transition;
     }
 
+
     @Override
     public void run() {
         while(!gameOver)
         {
-            System.out.println("running....");
+
+              System.out.println("running....");
             if(inventoryMenu!=null)
                 currentItem=inventoryMenu.getItem();
+            if(currentTile!=null)
+            {
+                System.out.println(currentTile.getTileType());
+                if(currentTile.getTileType()==TILETYPE.GOALA)
+                gameOver=true;
+            }
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e1) {

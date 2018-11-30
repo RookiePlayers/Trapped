@@ -48,6 +48,7 @@ public abstract class Maze implements  Runnable, MazeInterface {
     protected InventoryUI inventoryMenu;
     protected ArrayList<Obstacle> currentObstacle;
     protected Label invLabel;
+    protected boolean gameOver=false;
 
     public abstract void  setup();
     public void setInventoryMenu(InventoryUI InventorMenu)
@@ -90,6 +91,7 @@ public abstract class Maze implements  Runnable, MazeInterface {
 
         BorderPane window = new BorderPane();
         //StackPane stack = new StackPane();
+        window.setTop(new Label("HEY"));
         window.setCenter(stack);
 
         stack.setAlignment(Pos.CENTER);
@@ -102,44 +104,24 @@ public abstract class Maze implements  Runnable, MazeInterface {
     }
     public void startMaze(Scene scene)
     {
-
-
-
-        Image image2 = new Image(getClass().getResourceAsStream("/Images/maze4.png"));
-        //int n = (int) (Math.random()*5)+1;
-
-        if (n == 1)
-        {
-            image2 = new Image(getClass().getResourceAsStream("/Images/maze1.png"));
-            currentMaze = 1;
-        }
-        if (n == 2)
-        {
-            image2 = new Image(getClass().getResourceAsStream("/Images/maze2.png"));
-            currentMaze = 2;
-        }
-        if (n == 3)
-        {
-            image2 = new Image(getClass().getResourceAsStream("/Images/maze3.png"));
-            currentMaze = 3;
-        }
-        if (n == 4)
-        {
-            image2 = new Image(getClass().getResourceAsStream("/Images/maze4.png"));
-            currentMaze = 4;
-        }
-        if (n == 5)
-        {
-            image2 = new Image(getClass().getResourceAsStream("/Images/maze5.png"));
-            currentMaze = 5;
-        }
-
-
-
         playerImage =  new ImageView(new Image(getClass().getResourceAsStream("/Images/hero.png")));//player
         moveImage(scene, playerImage, transition);
 
     }
+    public void endGame()
+    {
+        stack.getChildren().clear();
+        stack.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/Images/youWin.png"))));
+    }
+    public boolean isGameOver() {
+        System.out.println("HERE");
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
     protected abstract TranslateTransition createTranslateTransition(final ImageView image);
     public Item itemGenerator()
     {
@@ -164,10 +146,22 @@ public abstract class Maze implements  Runnable, MazeInterface {
                 {
                     switch (event.getCode())
                     {
-                        case UP: if (currentTile.getTileType() != TILETYPE.T2 && currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T7&&currentTile.getTileType()!=TILETYPE.T9&&currentTile.getTileType()!=TILETYPE.BLOCKED) {transition.setToY(image.getY() - (KEYBOARD_MOVEMENT_DELTA - 320)); canMove = false; transition.playFromStart();whatDir = "up";} break;
-                        case RIGHT: if (currentTile.getTileType() != TILETYPE.T1 && currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T8&& currentTile.getTileType()!=TILETYPE.BLOCKED) {transition.setToX(image.getX() + (KEYBOARD_MOVEMENT_DELTA - 300)); canMove = false; transition.playFromStart();whatDir = "right";} break;
-                        case LEFT: if (currentTile.getTileType() != TILETYPE.T3 && currentTile.getTileType() != TILETYPE.T7 && currentTile.getTileType() != TILETYPE.T8&&currentTile.getTileType()!=TILETYPE.T9&& currentTile.getTileType()!=TILETYPE.BLOCKED) {transition.setToX(image.getX() - (KEYBOARD_MOVEMENT_DELTA - 300)); canMove = false; transition.playFromStart();whatDir = "left";} break;
-                        case DOWN: if (currentTile.getTileType() != TILETYPE.T5 &&currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T7 && currentTile.getTileType() != TILETYPE.T8&& currentTile.getTileType()!=TILETYPE.BLOCKED) {transition.setToY(image.getY() + (KEYBOARD_MOVEMENT_DELTA - 320)); canMove = false; transition.playFromStart();whatDir = "down";} break;
+                        case UP: {
+                            if (currentTile.getTileType() != TILETYPE.T2 && currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T7&&currentTile.getTileType()!=TILETYPE.T9&&currentTile.getTileType()!=TILETYPE.BLOCKED&&currentTile.getTileType()!=TILETYPE.GOAL) {transition.setToY(image.getY() - (KEYBOARD_MOVEMENT_DELTA - 320)); canMove = false; transition.playFromStart();whatDir = "up";}
+                            else if(currentTile.getTileType()==TILETYPE.GOALA){canMove=false;endGame();}
+                        } break;
+                        case RIGHT: {
+                            if (currentTile.getTileType() != TILETYPE.T1 && currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T8&& currentTile.getTileType()!=TILETYPE.BLOCKED) {transition.setToX(image.getX() + (KEYBOARD_MOVEMENT_DELTA - 300)); canMove = false; transition.playFromStart();whatDir = "right";}
+                            else if(currentTile.getTileType()==TILETYPE.GOALA){canMove=false;endGame();}
+                        } break;
+                        case LEFT: {
+                            if (currentTile.getTileType() != TILETYPE.T3 && currentTile.getTileType() != TILETYPE.T7 && currentTile.getTileType() != TILETYPE.T8&&currentTile.getTileType()!=TILETYPE.T9&& currentTile.getTileType()!=TILETYPE.BLOCKED) {transition.setToX(image.getX() - (KEYBOARD_MOVEMENT_DELTA - 300)); canMove = false; transition.playFromStart();whatDir = "left";}
+                            else if(currentTile.getTileType()==TILETYPE.GOALA){canMove=false;endGame();}
+                        } break;
+                        case DOWN: {
+                            if (currentTile.getTileType() != TILETYPE.T5 &&currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T7 && currentTile.getTileType() != TILETYPE.T8&& currentTile.getTileType()!=TILETYPE.BLOCKED&&currentTile.getTileType()!=TILETYPE.GOAL) {transition.setToY(image.getY() + (KEYBOARD_MOVEMENT_DELTA - 320)); canMove = false; transition.playFromStart();whatDir = "down";}
+                            else if(currentTile.getTileType()==TILETYPE.GOALA){canMove=false;endGame();}
+                        } break;
                     }
                 }
             }

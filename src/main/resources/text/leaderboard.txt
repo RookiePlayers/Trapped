@@ -1,5 +1,5 @@
-Adam,420
-James,600
-Amy,750
-Adam,1000
-Ali,60000
+Adam,420,0
+James,600,0
+Amy,750,0
+Adam,1000,0
+Ali,60000,0

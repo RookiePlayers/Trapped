@@ -127,7 +127,7 @@ public class Trapped extends Stage
 		b2.setMinWidth(120);
 		b2.setMinHeight(20);
 		hbox2.getChildren().addAll(b2);
-		b2.setOnAction(e -> new LeaderboardGUI().showAndWait());
+		b2.setOnAction(e -> new LeaderboardGUI("LeaderBoard","leaderboard.txt").showAndWait());
 
 		Image logo = new Image(getClass().getResourceAsStream("/Images/maze.png"));
 		ImageView imageView = new ImageView();

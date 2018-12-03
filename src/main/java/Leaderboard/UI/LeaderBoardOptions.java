@@ -10,47 +10,45 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-
 public class LeaderBoardOptions extends Stage {
-    public LeaderBoardOptions()
-    {
+    public LeaderBoardOptions() {
         setScene(leaderboardScene());
         initModality(Modality.APPLICATION_MODAL);
         setTitle("LeaderBoards");
 
 
     }
-    public Scene leaderboardScene()
-    {
-        BorderPane borderPane=new BorderPane();
-        VBox box=new VBox();
+
+    public Scene leaderboardScene() {
+        BorderPane borderPane = new BorderPane();
+        VBox box = new VBox();
         box.setPadding(new Insets(20));
         box.setSpacing(15);
-        Label title=new Label("TOP PLAYERS");
-        Button ihl=new Button("Item Hunters (LB)");
-        Button clb=new Button("\"Classic\" Leaderboard");
-        Button tclb=new Button("Time Challengers (LB)");
-        box.getChildren().addAll(title,ihl,clb,tclb);
+        Label title = new Label("TOP PLAYERS");
+        Button ihl = new Button("Item Hunters (LB)");
+        Button clb = new Button("\"Classic\" Leaderboard");
+        Button tclb = new Button("Time Challengers (LB)");
+        box.getChildren().addAll(title, ihl, clb, tclb);
         box.setAlignment(Pos.CENTER);
         borderPane.setCenter(box);
 
-        ihl.setOnAction(e->{
-            LeaderboardGUI gui=new LeaderboardGUI("ITEM HUNTERS LEADERBOARD","item_hunt_leaderboard.txt",0);
+        ihl.setOnAction(e -> {
+            LeaderboardGUI gui = new LeaderboardGUI("ITEM HUNTERS LEADERBOARD", "item_hunt_leaderboard.txt", 0);
 
             gui.showAndWait();
         });
-        clb.setOnAction(e->{
-            LeaderboardGUI gui=new LeaderboardGUI("CLASSIC LEADERBOARD","classic.txt");
+        clb.setOnAction(e -> {
+            LeaderboardGUI gui = new LeaderboardGUI("CLASSIC LEADERBOARD", "classic.txt");
 
             gui.showAndWait();
         });
-        tclb.setOnAction(e->{
-            LeaderboardGUI gui=new LeaderboardGUI("TIME CHALLENGE LEADERBOARD","tc_leaderboard.txt");
+        tclb.setOnAction(e -> {
+            LeaderboardGUI gui = new LeaderboardGUI("TIME CHALLENGE LEADERBOARD", "tc_leaderboard.txt");
 
             gui.showAndWait();
         });
 
-        Scene sc=new Scene(borderPane,800,800);
+        Scene sc = new Scene(borderPane, 800, 800);
         sc.getStylesheets().add(getClass().getResource("/css/gameMode.css").toExternalForm());
         ihl.getStyleClass().add("ih");
         clb.getStyleClass().add("classic");

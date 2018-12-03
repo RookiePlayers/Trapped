@@ -1,6 +1,6 @@
 package inventory.Models;
 
-import inventory.Effects;
+import inventory.controls.Effects;
 
 
 import javafx.animation.*;
@@ -56,18 +56,18 @@ public class Door extends Obstacle {
     }
 
     public void initDoor() {
-        Image image = new Image(getClass().getResourceAsStream("/Images/"+url));
+        Image image = new Image(getClass().getResourceAsStream("/Images/" + url));
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         setGraphic(imageView);
 
-        //setText(id);
 
-        // setStyle("-fx-background-color:transparent");
+
+
         setStyle("-fx-background-color:transparent;");
-        // "-fx-border-color:black;-fx-border-width:5px;-fx-border-radius:10");
+
         setPrefSize(width, height);
         setEffect(Effects.LIGHTING());
     }

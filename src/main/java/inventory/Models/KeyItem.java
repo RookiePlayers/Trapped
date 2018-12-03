@@ -1,21 +1,10 @@
 package inventory.Models;
 
-import Interface.ItemInterface;
-import inventory.Effects;
-import inventory.Models.Item;
-import inventory.Models.ItemStatus;
+import inventory.controls.Effects;
 
 import javafx.animation.Animation;
-import javafx.animation.ScaleTransition;
-import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.Duration;
-import java.time.Instant;
 
 public class KeyItem extends Item {
 
@@ -36,18 +25,18 @@ public class KeyItem extends Item {
         this.height = height;
 
 
-        Image image = new Image(getClass().getResourceAsStream("/Images/"+id.toLowerCase() + ".png"));
+        Image image = new Image(getClass().getResourceAsStream("/Images/" + id.toLowerCase() + ".png"));
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         setGraphic(imageView);
 
-        //setText(id);
 
-        // setStyle("-fx-background-color:transparent");
+
+
         setStyle("-fx-background-color:transparent;");
-        // "-fx-border-color:black;-fx-border-width:5px;-fx-border-radius:10");
+
         setPrefSize(width, height);
         setEffect(Effects.GLOW());
         animation = pulseAnim(1000);
@@ -72,7 +61,7 @@ public class KeyItem extends Item {
         imageView.setFitHeight(height);
         setGraphic(imageView);
         setStyle("-fx-background-color:transparent;");
-        // "-fx-border-color:black;-fx-border-width:5px;-fx-border-radius:10");
+
         setPrefSize(width, height);
         setEffect(Effects.GLOW());
         animation = pulseAnim(1000);
@@ -94,7 +83,7 @@ public class KeyItem extends Item {
 
     @Override
     public Object use() {
-        String usage = "doorWith"+ID;
+        String usage = "doorWith" + ID;
         return usage.toUpperCase();
     }
 

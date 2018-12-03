@@ -6,10 +6,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 
 public class Player extends Actor {
-    private int health=3;
-    private long speed=2000;
-
-
+    private int health = 3;
+    private long speed = 2000;
 
 
     private Inventory inventory;
@@ -17,13 +15,12 @@ public class Player extends Actor {
     public Player() {
 
 
-
     }
 
     public Player(String name, String url, int health, Inventory inventory) {
 
-        super.name=name;
-        super.url=url;
+        super.name = name;
+        super.url = url;
         this.health = health;
         this.inventory = inventory;
 

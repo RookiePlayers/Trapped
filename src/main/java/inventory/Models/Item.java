@@ -1,7 +1,6 @@
 package inventory.Models;
 
 
-
 import inventory.Inteface.ItemInterface;
 import inventory.UI.InfoDialog;
 import javafx.animation.Animation;
@@ -142,10 +141,9 @@ public class Item extends Button implements ItemInterface {
     }
 
 
-
     @Override
-    public  Object use() {
-    return null;
+    public Object use() {
+        return null;
     }
 
     @Override

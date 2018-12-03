@@ -32,7 +32,7 @@ public class DefaultItem extends Button implements ItemInterface {
 
     @Override
     public Duration getTimeElapsedSincePickedUp(Instant timeNow) {
-        return Duration.between(getTimePickedUp(),timeNow);
+        return Duration.between(getTimePickedUp(), timeNow);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class DefaultItem extends Button implements ItemInterface {
 
     @Override
     public void showInfo() {
-       // new InfoDialog(this).showAndWait();
+
 
     }
 

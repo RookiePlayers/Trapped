@@ -1,6 +1,7 @@
 package inventory.Inteface;
-public interface ItemInterface
-{
+
+public interface ItemInterface {
     Object use();
+
     String getImage();
 }

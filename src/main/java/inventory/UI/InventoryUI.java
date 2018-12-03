@@ -1,17 +1,15 @@
 package inventory.UI;
 
-import inventory.Effects;
+import inventory.controls.Effects;
 
 import inventory.Models.*;
 import javafx.application.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
-import javafx.css.*;
 import javafx.event.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.scene.image.*;
@@ -19,14 +17,12 @@ import javafx.scene.image.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Scanner;
-import java.text.*;
 import java.time.Instant;
 
 public class InventoryUI extends Stage {
     private final String name = "InventoryInterface";
     private Map<String, Item> stuff;
-    private Inventory inventory=new Inventory();
+    private Inventory inventory = new Inventory();
     private ArrayList<Item> items = new ArrayList<>();
     private int invRow = 9;
     private boolean full = false;
@@ -50,14 +46,13 @@ public class InventoryUI extends Stage {
         if (inventory.getItems().size() >= (invRow * invRow)) full = true;
 
 
-
         load();
         initModality(Modality.APPLICATION_MODAL);
         setTitle(name.toUpperCase());
 
     }
-    public void load()
-    {
+
+    public void load() {
 
         loadItems();
 
@@ -81,14 +76,14 @@ public class InventoryUI extends Stage {
         bp.setBottom(actionButtons());
 
         Scene s = new Scene(stackPane, 500, 500);
-        s.getStylesheets().add( getClass().getResource("/css/inventory.css").toExternalForm());
+        s.getStylesheets().add(getClass().getResource("/css/inventory.css").toExternalForm());
 
         bp.getStyleClass().add("Page");
         Thread t = new Thread(new Runnable() {
 
             @Override
             public void run() {
-                System.out.println(useItem);
+
                 if (useItem == null) {
                     useBtn.setDisable(true);
                     dropBtn.setDisable(true);
@@ -128,7 +123,7 @@ public class InventoryUI extends Stage {
     }
 
     public GridPane body() {
-        //Create 3 x 3 Grid
+        //Create row x row Grid
         GridPane gridpane = new GridPane();
         gridpane.setPadding(new Insets(5));
         gridpane.setAlignment(Pos.CENTER);
@@ -176,23 +171,23 @@ public class InventoryUI extends Stage {
             useBtn.setDisable(false);
             dropBtn.setDisable(false);
             useBtn.setOnAction(ev -> {
-                System.out.println(useItem.getImage());
+
                 scene.setCursor(new ImageCursor(new Image(getClass().getResourceAsStream(useItem.getImage()))));
                 close();
             });
         }
-        //System.out.println(useItem);
+
         Button b = (Button) e.getSource();
-        // System.out.println("**click**"+b.getId());
+
         for (int j = 0; j < panels.length; j++) {
             if (j == Integer.parseInt(b.getId())) {
-                // System.out.println("Selected at "+j);
+
                 panels[j].getStyleClass().clear();
                 panels[j].getStyleClass().add("selectedGrid");
             } else {
                 panels[j].getStyleClass().clear();
                 panels[j].getStyleClass().add("unselectedGrid");
-                // System.out.println("UNSelected at "+j);
+
             }
         }
 
@@ -310,9 +305,8 @@ public class InventoryUI extends Stage {
                 while ((st = fileReader.readLine()) != null) {
                     String temp[];
                     temp = st.split(",");
-                    for(String s:temp)
-                        System.out.println(s);
-                    System.out.println("--------------------------------");
+                    for (String s : temp)
+
                     if (temp.length > 0) {
                         Item item = (new Item(temp[0], temp[1], temp[2], temp[3], ItemStatus.valueOf(temp[temp.length - 1])));
 
@@ -338,14 +332,14 @@ public class InventoryUI extends Stage {
                     public void run() {
                         int count = -1;
                         for (Item it : inventory.getItems()) {
-                            System.out.println(it + "\n~" + item);
+
                             if (it.toString().equals(item.toString())) {
 
                                 break;
                             } else count++;
                         }
                         if (inventory.getSize() >= 1) count++;
-                        System.out.println(inventory.getSize() + "\n" + count);
+
                         try {
                             if (count > -1)
                                 inventory.getItems().remove(count);
@@ -391,8 +385,7 @@ public class InventoryUI extends Stage {
         heading.getStyleClass().add("header");
         invCapacity = new Label("Used Slots: " + inventory.getSize() + "  Max: " + (invRow * invRow));
         invCapacity.getStyleClass().add("slotsLabel");
-        // Label invCapacity=new Label("Used Slots: "+items.size()+"  Max: "+capacity);
-        //set Properties
+         //set Properties
 
         //add children and set Properties
         title.getChildren().addAll(heading, invCapacity);

@@ -1,9 +1,8 @@
 package Maze.MazeDifficulty;
 
-public class Coord
-{
-    private double x=0;
-    private double y=0;
+public class Coord {
+    private double x = 0;
+    private double y = 0;
 
     public double getX() {
         return x;

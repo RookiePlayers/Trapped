@@ -37,8 +37,8 @@ public class Timer extends AnimationTimer {
 
     public void setTime(long time) {
         this.time = time;
-        this.timestamp=0;
-        this.fraction=0;
+        this.timestamp = 0;
+        this.fraction = 0;
     }
 
     public long getFraction() {
@@ -58,39 +58,39 @@ public class Timer extends AnimationTimer {
     }
 
     @Override
-        public void start() {
-            // current time adjusted by remaining time from last run
-            timestamp = System.currentTimeMillis() - fraction;
-            super.start();
-        }
+    public void start() {
+        // current time adjusted by remaining time from last run
+        timestamp = System.currentTimeMillis() - fraction;
+        super.start();
+    }
 
-        @Override
-        public void stop() {
-            super.stop();
-            // save leftover time not handled with the last update
-            fraction = System.currentTimeMillis() - timestamp;
-        }
-        public void pause()
-        {
+    @Override
+    public void stop() {
+        super.stop();
+        // save leftover time not handled with the last update
+        fraction = System.currentTimeMillis() - timestamp;
+    }
 
-        }
+    public void pause() {
 
-        @Override
-        public void handle(long now) {
-            long newTime = System.currentTimeMillis();
-            if (timestamp + 1000 <= newTime) {
-                long deltaT = (newTime - timestamp) / 1000;
-                time += deltaT;
-                timestamp += 1000 * deltaT;
+    }
 
-                if(timeLabel!=null){
-                    timeLabel.setText(Long.toString(time)+" sec(s)");
-                }
+    @Override
+    public void handle(long now) {
+        long newTime = System.currentTimeMillis();
+        if (timestamp + 1000 <= newTime) {
+            long deltaT = (newTime - timestamp) / 1000;
+            time += deltaT;
+            timestamp += 1000 * deltaT;
+
+            if (timeLabel != null) {
+                timeLabel.setText(Long.toString(time) + " sec(s)");
             }
         }
-        @Override
-        public  String toString()
-        {
-            return  time+"";
-        }
+    }
+
+    @Override
+    public String toString() {
+        return time + "";
+    }
 }

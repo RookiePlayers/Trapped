@@ -12,7 +12,7 @@ public class PositionedItem extends VBox {
 
     public PositionedItem(Item item) {
         this.item = item;
-        this.coordinates = new Coord(0,0);
+        this.coordinates = new Coord(0, 0);
 
         getChildren().addAll(item);
         setAlignment(Pos.CENTER);
@@ -20,10 +20,11 @@ public class PositionedItem extends VBox {
         setTranslateX(coordinates.getX());
         setTranslateY(coordinates.getY());
         setMouseTransparent(false);
-        setMaxSize(Region.USE_PREF_SIZE,Region.USE_PREF_SIZE);
+        setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
 
     }
+
     public PositionedItem(Item item, Coord coordinates) {
         this.item = item;
         this.coordinates = coordinates;
@@ -34,7 +35,7 @@ public class PositionedItem extends VBox {
         setTranslateX(coordinates.getX());
         setTranslateY(coordinates.getY());
         setMouseTransparent(false);
-        setMaxSize(Region.USE_PREF_SIZE,Region.USE_PREF_SIZE);
+        setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
     }
 
     public Item getItem() {

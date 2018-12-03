@@ -1,6 +1,6 @@
 package inventory.Models;
 
-import inventory.Effects;
+import inventory.controls.Effects;
 
 import javafx.animation.Animation;
 import javafx.scene.image.Image;
@@ -49,8 +49,8 @@ public class HealthPotion extends Item {
     }
 
     public void initHP() {
-        System.out.println("Images/"+ ID.toLowerCase() + ".png");
-        Image image = new Image(getClass().getResourceAsStream("/Images/"+ ID.toLowerCase() + ".png"));
+        System.out.println("Images/" + ID.toLowerCase() + ".png");
+        Image image = new Image(getClass().getResourceAsStream("/Images/" + ID.toLowerCase() + ".png"));
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(width / 2);
@@ -59,11 +59,11 @@ public class HealthPotion extends Item {
         setText(health + "");
         setTextFill(Color.WHITE);
 
-        //setText(id);
 
-        // setStyle("-fx-background-color:transparent");
+
+
         setStyle("-fx-background-color:transparent;");
-        // "-fx-border-color:black;-fx-border-width:5px;-fx-border-radius:10");
+
         setPrefSize(width, height);
         setEffect(Effects.GLOW());
         animation = pulseAnim(1000);

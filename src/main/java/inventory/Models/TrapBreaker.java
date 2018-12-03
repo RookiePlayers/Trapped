@@ -1,7 +1,6 @@
 package inventory.Models;
 
-import inventory.Effects;
-import inventory.Models.Item;
+import inventory.controls.Effects;
 
 import javafx.animation.Animation;
 import javafx.scene.image.Image;
@@ -14,7 +13,7 @@ public class TrapBreaker extends Item {
     private double height;
     private boolean playAnimation = false;
     private Animation animation;
-  
+
 
     public TrapBreaker() {
         super("TB", "TrapBreaker", "Time Freeze 20 sec", "Freezes Time", ItemStatus.NEW);
@@ -57,14 +56,14 @@ public class TrapBreaker extends Item {
         imageView.setFitWidth(width / 2);
         imageView.setFitHeight(height / 2);
         setGraphic(imageView);
-      
+
         setTextFill(Color.WHITE);
 
-        //setText(id);
 
-        // setStyle("-fx-background-color:transparent");
+
+
         setStyle("-fx-background-color:transparent;");
-        // "-fx-border-color:black;-fx-border-width:5px;-fx-border-radius:10");
+
         setPrefSize(width, height);
         setEffect(Effects.GLOW());
         animation = pulseAnim(1000);

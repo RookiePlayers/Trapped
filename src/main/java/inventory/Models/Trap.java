@@ -1,7 +1,7 @@
 package inventory.Models;
 
 import Maze.Player;
-import inventory.Effects;
+import inventory.controls.Effects;
 
 
 import javafx.animation.*;
@@ -52,7 +52,7 @@ public class Trap extends Obstacle {
     }
 
     public Player setOfTrap(Player player) {
-        player.setHealth(player.getHealth()-1);
+        player.setHealth(player.getHealth() - 1);
         return player;
     }
 
@@ -62,18 +62,18 @@ public class Trap extends Obstacle {
     }
 
     public void initTrap() {
-        Image image = new Image(getClass().getResourceAsStream("/Images/"+url));
+        Image image = new Image(getClass().getResourceAsStream("/Images/" + url));
 
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
         setGraphic(imageView);
 
-        //setText(id);
 
-        // setStyle("-fx-background-color:transparent");
+
+
         setStyle("-fx-background-color:transparent;");
-        // "-fx-border-color:black;-fx-border-width:5px;-fx-border-radius:10");
+
         setPrefSize(width, height);
         setEffect(Effects.LIGHTING());
     }

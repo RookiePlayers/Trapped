@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+
 import java.util.ArrayList;
 
 public interface MazeInterface {
@@ -19,13 +20,16 @@ public interface MazeInterface {
     void setTitle(String title);
 
     BorderPane initMaze(Scene scene, InventoryUI inventoryMenu, Label invLabel, Item item, Player player, ArrayList<Item> items, Inventory inventory);
-     void startMaze(Scene scene);
-     void resetMaze();
-     Item itemGenerator();
-     boolean hasStarted();
-     void setStop(boolean thread);
 
+    void startMaze(Scene scene);
 
+    void resetMaze();
+
+    Item itemGenerator();
+
+    boolean hasStarted();
+
+    void setStop(boolean thread);
 
 
 }

@@ -1,6 +1,6 @@
 package Maze;
 
-public  abstract class Actor {
+public abstract class Actor {
     protected String name;
     protected String url;
 

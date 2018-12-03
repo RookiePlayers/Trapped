@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package inventory;
+package inventory.controls;
 
 import javafx.scene.effect.Light.*;
 import javafx.scene.paint.Color;

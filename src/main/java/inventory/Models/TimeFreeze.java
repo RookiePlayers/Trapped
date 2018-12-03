@@ -1,7 +1,6 @@
 package inventory.Models;
 
-import inventory.Effects;
-import inventory.Models.Item;
+import inventory.controls.Effects;
 
 import javafx.animation.Animation;
 import javafx.scene.image.Image;
@@ -60,11 +59,11 @@ public class TimeFreeze extends Item {
         setText(freezeLength + "");
         setTextFill(Color.WHITE);
 
-        //setText(id);
 
-        // setStyle("-fx-background-color:transparent");
+
+
         setStyle("-fx-background-color:transparent;");
-        // "-fx-border-color:black;-fx-border-width:5px;-fx-border-radius:10");
+
         setPrefSize(width, height);
         setEffect(Effects.GLOW());
         animation = pulseAnim(1000);

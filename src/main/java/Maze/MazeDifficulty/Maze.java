@@ -25,35 +25,35 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public abstract class Maze implements  Runnable, MazeInterface {
+public abstract class Maze implements Runnable, MazeInterface {
     protected Player player;
     protected String title;
     protected static final int KEYBOARD_MOVEMENT_DELTA = 700;
     protected static final Duration TRANSLATE_DURATION = Duration.seconds(2.5);
     protected boolean canMove = true;
     protected String whatDir = "";
-    protected Tile mazeImage,currentTile;
+    protected Tile mazeImage, currentTile;
     protected ImageView playerImage = new ImageView(new Image(getClass().getResourceAsStream("/Images/hero.png")));
     protected StackPane stack = new StackPane();
     private final TranslateTransition transition = createTranslateTransition(playerImage);
     private int currentMaze = 0;
     private String whereInMaze = "a";
     private int n = 4;
-    protected int bgem=0,ggem=0,pgem=0;
-    protected Item currentItem=null;
+    protected int bgem = 0, ggem = 0, pgem = 0;
+    protected Item currentItem = null;
     protected Inventory inventory;
     protected Scene scene;
     protected long timeLimit;
     protected InventoryUI inventoryMenu;
     protected ArrayList<Obstacle> currentObstacle;
-    protected  ArrayList<Item>items;
-    protected  boolean freezeTime=false;
-    protected  long freezeLength=1;
+    protected ArrayList<Item> items;
+    protected boolean freezeTime = false;
+    protected long freezeLength = 1;
     protected Label invLabel;
-    protected boolean gameOver=false;
-    protected Label roomLbl=new Label();
+    protected boolean gameOver = false;
+    protected Label roomLbl = new Label();
     private AnimationTimer timer;
-    protected  boolean dead=false;
+    protected boolean dead = false;
 
     public boolean isDead() {
         return dead;
@@ -95,10 +95,10 @@ public abstract class Maze implements  Runnable, MazeInterface {
         this.pgem = pgem;
     }
 
-    public abstract void  setup();
-    public void setInventoryMenu(InventoryUI InventorMenu)
-    {
-        this.inventoryMenu=inventoryMenu;
+    public abstract void setup();
+
+    public void setInventoryMenu(InventoryUI InventorMenu) {
+        this.inventoryMenu = inventoryMenu;
     }
 
     public String getTitle() {
@@ -148,71 +148,63 @@ public abstract class Maze implements  Runnable, MazeInterface {
 
                 }
             }
-            public long getTime()
-            {
+
+            public long getTime() {
                 return time;
             }
+
             @Override
-            public  String toString()
-            {
-                return  time+"";
+            public String toString() {
+                return time + "";
             }
         };
-        this.player=player;
-        this.inventory=inventory;
-        this.scene=scene;
-        this.inventoryMenu=inventoryMenu;
-        this.invLabel=invLabel;
-        this.currentItem=item;
-        this.items=items;
-        System.out.println(">>"+invLabel.getText());
-        System.out.println(inventoryMenu.getItemCount());
+        this.player = player;
+        this.inventory = inventory;
+        this.scene = scene;
+        this.inventoryMenu = inventoryMenu;
+        this.invLabel = invLabel;
+        this.currentItem = item;
+        this.items = items;
 
-        //initModality(Modality.APPLICATION_MODAL);
-        //Group root = new Group(startMaze());
-        //Scene scene = new Scene(startMaze(), 400, 400);
-        //Pane pane = new Pane();
-        mazeImage= new Tile("intro.png","a");
+        mazeImage = new Tile("intro.png", "a");
         Image image1 = new Image(getClass().getResourceAsStream(player.getUrl()));
         playerImage.setImage(image1);//player
 
 
-        //TranslateTransition transition = createTranslateTransition(selectedImage);
 
-        //pane.getChildren().add(mazeImage);
-        //Scene scene = new Scene(pane);
 
         BorderPane window = new BorderPane();
-        //StackPane stack = new StackPane();
+
         window.setTop(new Label("HEY"));
         window.setCenter(stack);
         roomLbl.setFont(new Font(100));
         roomLbl.setTextFill(Color.GREY);
 
         stack.setAlignment(Pos.CENTER);
-        stack.getChildren().addAll(mazeImage,roomLbl,playerImage);//player and current maze
-    currentTile=mazeImage;
+        stack.getChildren().addAll(mazeImage, roomLbl, playerImage);//player and current maze
+        currentTile = mazeImage;
         startMaze(scene);
 
         setup();
         return window;
     }
+
     @Override
-    public void resetMaze()
-    {
-        initMaze(scene,inventoryMenu,invLabel,currentItem,player,items,inventory);
+    public void resetMaze() {
+        initMaze(scene, inventoryMenu, invLabel, currentItem, player, items, inventory);
     }
-    public void startMaze(Scene scene)
-    {
-        playerImage =  new ImageView(new Image(getClass().getResourceAsStream("/Images/hero.png")));//player
+
+    public void startMaze(Scene scene) {
+        playerImage = new ImageView(new Image(getClass().getResourceAsStream("/Images/hero.png")));//player
         moveImage(scene, playerImage, transition);
 
     }
-    public void endGame()
-    {
+
+    public void endGame() {
         stack.getChildren().clear();
         stack.getChildren().add(new ImageView(new Image(getClass().getResourceAsStream("/Images/youWin.png"))));
     }
+
     public boolean isGameOver() {
         System.out.println("HERE");
         return gameOver;
@@ -231,74 +223,85 @@ public abstract class Maze implements  Runnable, MazeInterface {
     }
 
     protected abstract TranslateTransition createTranslateTransition(final ImageView image);
-    public Item itemGenerator()
-    {
+
+    public Item itemGenerator() {
 
 
-        int rand=(int)(Math.random()*(inventory.getItems().size()));
-        if(inventory.getItems().size()>=4) {
+        int rand = (int) (Math.random() * (inventory.getItems().size()));
+        if (inventory.getItems().size() >= 4) {
 
             Collections.shuffle(inventory.getItems());
-            System.out.println(inventory.getItems().get(0));
-            if(inventory.getItems().get(0).getID().contains("key"))
-            return  itemGenerator();
+
+            if (inventory.getItems().get(0).getID().contains("key"))
+                return itemGenerator();
             else {
-                System.out.println("----------------------------------------");
-                return inventory.getItems().get(0);
+                 return inventory.getItems().get(0);
             }
-        }else
+        } else
             return itemGenerator();
     }
-    private void moveImage(Scene scene, final ImageView image, TranslateTransition transition)
-    {
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>()
-        {
-            public void handle(KeyEvent event)
-            {
 
-                System.out.println("Movabe? "+canMove+"\nTILETYPE: "+currentTile.getTileType());
-                if (canMove)
-                {
-                    switch (event.getCode())
-                    {
+    private void moveImage(Scene scene, final ImageView image, TranslateTransition transition) {
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent event) {
+
+                System.out.println("Movabe? " + canMove + "\nTILETYPE: " + currentTile.getTileType());
+                if (canMove) {
+                    switch (event.getCode()) {
                         case UP: {
-                            if (currentTile.getTileType() != TILETYPE.T2 && currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T7&&currentTile.getTileType()!=TILETYPE.T9&&currentTile.getTileType()!=TILETYPE.T8&&currentTile.getTileType()!=TILETYPE.T10&&currentTile.getTileType()!=TILETYPE.T14&&currentTile.getTileType()!=TILETYPE.BLOCKED&&currentTile.getTileType()!=TILETYPE.GOAL) {
+                            if (currentTile.getTileType() != TILETYPE.T2 && currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T7 && currentTile.getTileType() != TILETYPE.T9 && currentTile.getTileType() != TILETYPE.T8 && currentTile.getTileType() != TILETYPE.T10 && currentTile.getTileType() != TILETYPE.T14 && currentTile.getTileType() != TILETYPE.BLOCKED && currentTile.getTileType() != TILETYPE.GOAL) {
                                 transition.setToY(image.getY() - (KEYBOARD_MOVEMENT_DELTA - 320));
                                 transition.setDuration(new Duration(Math.abs((player.getSpeed()))));
-                                canMove = false; transition.playFromStart();whatDir = "up";
-                                System.out.println("Player Sppeed: "+player.getSpeed());
+                                canMove = false;
+                                transition.playFromStart();
+                                whatDir = "up";
+                                System.out.println("Player Sppeed: " + player.getSpeed());
 
-                             //   roomLbl.setText(currentTile.getID().toUpperCase());
+                              } else if (currentTile.getTileType() == TILETYPE.GOALA) {
+                                canMove = false;
+                                endGame();
                             }
-                            else if(currentTile.getTileType()==TILETYPE.GOALA){canMove=false;endGame();}
-                        } break;
+                        }
+                        break;
                         case RIGHT: {
-                            if (currentTile.getTileType() != TILETYPE.T1 && currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T8&&currentTile.getTileType()!=TILETYPE.T10&&currentTile.getTileType()!=TILETYPE.T11&&currentTile.getTileType()!=TILETYPE.T13&&currentTile.getTileType()!=TILETYPE.T15&& currentTile.getTileType()!=TILETYPE.BLOCKED) {
+                            if (currentTile.getTileType() != TILETYPE.T1 && currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T8 && currentTile.getTileType() != TILETYPE.T10 && currentTile.getTileType() != TILETYPE.T11 && currentTile.getTileType() != TILETYPE.T13 && currentTile.getTileType() != TILETYPE.T15 && currentTile.getTileType() != TILETYPE.BLOCKED) {
                                 transition.setToX(image.getX() + (KEYBOARD_MOVEMENT_DELTA - 300));
                                 transition.setDuration(new Duration(Math.abs((player.getSpeed()))));
-                                canMove = false; transition.playFromStart();whatDir = "right";
-                              //  roomLbl.setText(currentTile.getID().toUpperCase());
+                                canMove = false;
+                                transition.playFromStart();
+                                whatDir = "right";
+                                  } else if (currentTile.getTileType() == TILETYPE.GOALA) {
+                                canMove = false;
+                                endGame();
                             }
-                            else if(currentTile.getTileType()==TILETYPE.GOALA){canMove=false;endGame();}
-                        } break;
+                        }
+                        break;
                         case LEFT: {
-                            if (currentTile.getTileType() != TILETYPE.T3 && currentTile.getTileType() != TILETYPE.T7 && currentTile.getTileType() != TILETYPE.T8&&currentTile.getTileType()!=TILETYPE.T9&&currentTile.getTileType()!=TILETYPE.T12&&currentTile.getTileType()!=TILETYPE.T12&&currentTile.getTileType()!=TILETYPE.T13&&currentTile.getTileType()!=TILETYPE.T15&& currentTile.getTileType()!=TILETYPE.BLOCKED) {
+                            if (currentTile.getTileType() != TILETYPE.T3 && currentTile.getTileType() != TILETYPE.T7 && currentTile.getTileType() != TILETYPE.T8 && currentTile.getTileType() != TILETYPE.T9 && currentTile.getTileType() != TILETYPE.T12 && currentTile.getTileType() != TILETYPE.T12 && currentTile.getTileType() != TILETYPE.T13 && currentTile.getTileType() != TILETYPE.T15 && currentTile.getTileType() != TILETYPE.BLOCKED) {
                                 transition.setToX(image.getX() - (KEYBOARD_MOVEMENT_DELTA - 300));
                                 transition.setDuration(new Duration(Math.abs((player.getSpeed()))));
-                                canMove = false; transition.playFromStart();whatDir = "left";
-                                //roomLbl.setText(currentTile.getID().toUpperCase());
+                                canMove = false;
+                                transition.playFromStart();
+                                whatDir = "left";
+                                    } else if (currentTile.getTileType() == TILETYPE.GOALA) {
+                                canMove = false;
+                                endGame();
                             }
-                            else if(currentTile.getTileType()==TILETYPE.GOALA){canMove=false;endGame();}
-                        } break;
+                        }
+                        break;
                         case DOWN: {
-                            if (currentTile.getTileType() != TILETYPE.T5 &&currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T7&&currentTile.getTileType()!=TILETYPE.T12&&currentTile.getTileType()!=TILETYPE.T14&&currentTile.getTileType()!=TILETYPE.T13&&currentTile.getTileType()!=TILETYPE.T11&&currentTile.getTileType()!=TILETYPE.T14&& currentTile.getTileType()!=TILETYPE.BLOCKED&&currentTile.getTileType()!=TILETYPE.GOAL) {
+                            if (currentTile.getTileType() != TILETYPE.T5 && currentTile.getTileType() != TILETYPE.T6 && currentTile.getTileType() != TILETYPE.T7 && currentTile.getTileType() != TILETYPE.T12 && currentTile.getTileType() != TILETYPE.T14 && currentTile.getTileType() != TILETYPE.T13 && currentTile.getTileType() != TILETYPE.T11 && currentTile.getTileType() != TILETYPE.T14 && currentTile.getTileType() != TILETYPE.BLOCKED && currentTile.getTileType() != TILETYPE.GOAL) {
                                 transition.setToY(image.getY() + (KEYBOARD_MOVEMENT_DELTA - 320));
                                 transition.setDuration(new Duration(Math.abs((player.getSpeed()))));
-                                canMove = false; transition.playFromStart();whatDir = "down";
-                               // roomLbl.setText(currentTile.getID().toUpperCase());
+                                canMove = false;
+                                transition.playFromStart();
+                                whatDir = "down";
+                                 } else if (currentTile.getTileType() == TILETYPE.GOALA) {
+                                canMove = false;
+                                endGame();
                             }
-                            else if(currentTile.getTileType()==TILETYPE.GOALA){canMove=false;endGame();}
-                        } break;
+                        }
+                        break;
                     }
                 }
             }

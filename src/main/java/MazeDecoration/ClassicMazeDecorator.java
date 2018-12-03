@@ -4,7 +4,7 @@ import Leaderboard.Models.Leaderboard;
 import Leaderboard.UI.LeaderboardGUI;
 import Maze.*;
 import Maze.MazeDifficulty.Maze;
-import inventory.Effects;
+import inventory.controls.Effects;
 import inventory.Models.Inventory;
 import inventory.Models.Item;
 import inventory.UI.InventoryUI;
@@ -27,7 +27,7 @@ import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
-public  class ClassicMazeDecorator  extends MazeDecorator implements  Runnable{
+public class ClassicMazeDecorator extends MazeDecorator implements Runnable {
 
     private Maze maze;
     private Label timerLabel;
@@ -35,74 +35,74 @@ public  class ClassicMazeDecorator  extends MazeDecorator implements  Runnable{
     private Timer timer;
     private BorderPane window;
     private Scene scene;
-    private boolean start=true;
-    private String name="Player"+(int)(Math.random()*(200));
+    private boolean start = true;
+    private String name = "Player" + (int) (Math.random() * (200));
     private Player player;
     private Item item;
     private InventoryUI inventoryMenu;
     private Label invLabel;
     private ArrayList<Item> items;
     private Inventory inventory;
+
     public ClassicMazeDecorator(Maze maze) {
         super(maze);
-        this.maze=maze;
-        timerLabel=new Label();
-        timerLabel.setFont(new Font("Thoma",24));
+        this.maze = maze;
+        timerLabel = new Label();
+        timerLabel.setFont(new Font("Thoma", 24));
         timerLabel.setTextFill(Color.WHITE);
         timer = new Timer();
     }
+
     @Override
     public BorderPane initMaze(Scene scene, InventoryUI inventoryMenu, Label invLabel, Item item, Player player, ArrayList<Item> items, Inventory inventory) //getMaze()
     {
-        this.player=player;
-        this.inventory=inventory;
-        this.scene=scene;
-        this.inventoryMenu=inventoryMenu;
-        this.invLabel=invLabel;
-        this.item=item;
-        timerLabel=new Label();
+        this.player = player;
+        this.inventory = inventory;
+        this.scene = scene;
+        this.inventoryMenu = inventoryMenu;
+        this.invLabel = invLabel;
+        this.item = item;
+        timerLabel = new Label();
         timerLabel.setFont(new Font(24));
         timerLabel.setTextFill(Color.WHITE);
-        System.out.println("INITIALIZING MASE AT CLASSIC ");
-         window=maze.initMaze(scene,inventoryMenu,invLabel,item,player,items,inventory);
+
+        window = maze.initMaze(scene, inventoryMenu, invLabel, item, player, items, inventory);
         timerLabel.setText("0 sec");
-        HBox box=new HBox();
+        HBox box = new HBox();
         box.setAlignment(Pos.CENTER);
         box.setSpacing(20.0);
         box.setPadding(new Insets(12.0));
-        Label l=new Label("Time Elapsed: ");
-        box.getChildren().addAll(l,timerLabel);
+        Label l = new Label("Time Elapsed: ");
+        box.getChildren().addAll(l, timerLabel);
         l.setTextFill(Color.WHITE);
 
 
-
-
         window.setEffect(Effects.DROP_SHADOW());
-        Button consumeButton=new Button("CONSUME");
+        Button consumeButton = new Button("CONSUME");
         consumeButton.setDisable(true);
-        Button returnButton=new Button("RETURN");
+        Button returnButton = new Button("RETURN");
         returnButton.setDisable(true);
 
         consumeButton.setOnAction(
-                e->{
+                e -> {
 
                 }
         );
-        HBox hbox=new HBox();
-        hbox.getChildren().addAll(window.getTop(),box);
+        HBox hbox = new HBox();
+        hbox.getChildren().addAll(window.getTop(), box);
         hbox.setPadding(new Insets(15.0));
         hbox.setAlignment(Pos.CENTER);
         hbox.setSpacing(25);
         window.setTop(hbox);
-         timer = new Timer(timerLabel);
-         consumeButton.getStyleClass().add("consume");
-         returnButton.getStyleClass().add("drop");
+        timer = new Timer(timerLabel);
+        consumeButton.getStyleClass().add("consume");
+        returnButton.getStyleClass().add("drop");
 
         return window;
     }
-    public void startMaze(Scene scene)
-    {
-        this.scene=scene;
+
+    public void startMaze(Scene scene) {
+        this.scene = scene;
         maze.startMaze(scene);
 
     }
@@ -110,111 +110,106 @@ public  class ClassicMazeDecorator  extends MazeDecorator implements  Runnable{
     @Override
     public void resetMaze() {
         System.out.println("resettting...");
-        initMaze(scene,inventoryMenu,invLabel,item,player,items,inventory);
+        initMaze(scene, inventoryMenu, invLabel, item, player, items, inventory);
 
     }
 
-    public StackPane resetMainMenu()
-    {
-        StackPane stackPane=new StackPane();
-        ImageView background=new ImageView(new Image(getClass().getResourceAsStream("/Images/youWin.png")));
-        ImageView player=new ImageView(new Image(getClass().getResourceAsStream("/Images/hero.png")));
-        VBox box=new VBox();
+    public StackPane resetMainMenu() {
+        StackPane stackPane = new StackPane();
+        ImageView background = new ImageView(new Image(getClass().getResourceAsStream("/Images/youWin.png")));
+        ImageView player = new ImageView(new Image(getClass().getResourceAsStream("/Images/hero.png")));
+        VBox box = new VBox();
         box.setPadding(new Insets(15));
         box.setSpacing(10);
-        box.setMaxSize(300,300);
+        box.setMaxSize(300, 300);
         box.setTranslateY(150);
-        TextField nameField=new TextField();
-        Label complete=new Label();
+        TextField nameField = new TextField();
+        Label complete = new Label();
         complete.setTextFill(Color.WHITE);
-        complete.setText("Congratulations!\nYour Time: "+timer.toString()+" sec(s)");
+        complete.setText("Congratulations!\nYour Time: " + timer.toString() + " sec(s)");
         complete.setFont(new Font(26));
         nameField.setPromptText("Enter a Name..");
-        Button save=new Button("Save to LeaderBoard");
-        Button viewLeaderBoard= new Button("View Leaderboard");
-        Button replay= new Button("Play Again");
-
-       // if(!nameField.getText().equals(""))
+        Button save = new Button("Save to LeaderBoard");
+        Button viewLeaderBoard = new Button("View Leaderboard");
+        Button replay = new Button("Play Again");
 
 
-        Leaderboard leaderboard=new Leaderboard("classic.txt");
+
+
+        Leaderboard leaderboard = new Leaderboard("classic.txt");
         save.setOnAction(
-                e->{
-                    name=nameField.getText();
+                e -> {
+                    name = nameField.getText();
                     this.player.setName(name);
-                    leaderboard.saveToLeaderBoard("classic.txt",name,timer.toString()+" sec(s)",maze.getTitle());
+                    leaderboard.saveToLeaderBoard("classic.txt", name, timer.toString() + " sec(s)", maze.getTitle());
                     save.setDisable(true);
                 }
         );
 
-        viewLeaderBoard.setOnAction(e->{
-            LeaderboardGUI gui=new LeaderboardGUI("CLASSIC LEADERBOARD","classic.txt");
+        viewLeaderBoard.setOnAction(e -> {
+            LeaderboardGUI gui = new LeaderboardGUI("CLASSIC LEADERBOARD", "classic.txt");
 
             gui.showAndWait();
         });
-        replay.setOnAction(e->{maze.resetMaze();time=0;start=true;});
-
+        replay.setOnAction(e -> {
+            maze.resetMaze();
+            time = 0;
+            start = true;
+        });
 
 
         box.setAlignment(Pos.CENTER);
-        box.getChildren().addAll(complete,nameField,save,viewLeaderBoard);
-        stackPane.getChildren().addAll(background,player,box);
-        return  stackPane;
+        box.getChildren().addAll(complete, nameField, save, viewLeaderBoard);
+        stackPane.getChildren().addAll(background, player, box);
+        return stackPane;
     }
-     private long timeOnFrezze=0;
-    private boolean firstStart=true;
+
+    private long timeOnFrezze = 0;
+    private boolean firstStart = true;
 
     @Override
     public boolean hasStarted() {
         return start;
     }
+
     @Override
-    public void setStop(boolean stop)
-    {
-        this.start=stop;
+    public void setStop(boolean stop) {
+        this.start = stop;
     }
 
 
-
     @Override
-    public void run() {time=0;
+    public void run() {
+        time = 0;
 
-        while(start)
-        {
+        while (start) {
             try {
                 Thread.sleep(1000);
 
-               // System.out.println(new SimpleDateFormat("hh:MM:ss").format(Duration.between()));
-                if(firstStart){
-                    System.out.println("strating...");
-                    firstStart=false;
+                if (firstStart) {
+
+                    firstStart = false;
                     maze.setFreezeLength(1);
 
                     timer.start();
                 }
-                if(maze.isFreezeTime())
-                {
+                if (maze.isFreezeTime()) {
 
                     timer.stop();
-                }else if(maze.getFreezeLength()<=0)
-                {
-                    System.out.println(">>>"+time);
+                } else if (maze.getFreezeLength() <= 0) {
+
                     timer.setTime(time);
 
-                    firstStart=true;
+                    firstStart = true;
+                } else {
+
                 }
-                else{
-                    System.out.println(timer.getTime());
-                }
-
-                System.out.println("Freeze? "+maze.isFreezeTime());
 
 
 
-                if(maze.isGameOver())
-                {
+                if (maze.isGameOver()) {
                     timer.stop();
-                    StackPane stackPane=resetMainMenu();
+                    StackPane stackPane = resetMainMenu();
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
@@ -223,31 +218,21 @@ public  class ClassicMazeDecorator  extends MazeDecorator implements  Runnable{
                     });
 
 
-                    start=false;
+                    start = false;
                     //save data here
 
                 }
 
-                if(maze.isDead())
-                {
-                    start=false;
+                if (maze.isDead()) {
+                    start = false;
                 }
-                time=Long.parseLong(timer.toString());
-
-              /*  Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        System.out.println(time);
-                       // timerLabel.setText(new SimpleDateFormat("hh:MM:ss").format(time));
-
-                    }
-                });*/
+                time = Long.parseLong(timer.toString());
 
 
-                       } catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 //e.printStackTrace();
-                start=false;
-                System.out.println("Thread interrupted");
+                start = false;
+
             }
         }
     }

@@ -6,7 +6,7 @@ public class Obstacle extends Button {
     protected String ID = "";
     protected String name = "gold_door";
     protected String description = "";
-    protected String url="";
+    protected String url = "";
 
     public Obstacle(String ID, String name, String description, String url) {
         this.ID = ID;

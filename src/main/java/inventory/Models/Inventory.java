@@ -6,26 +6,25 @@ import inventory.controls.InventoryUpdater;
 import java.util.ArrayList;
 
 public class Inventory {
-  private  ArrayList<Item> items=new ArrayList<>();
-    private ArrayList<Gem>gems =new ArrayList<>();
-  private boolean duplicates=true;
-    private InventoryUpdater inv=new InventoryUpdater();
-    private ArrayList<InventoryObserver> collection=new ArrayList<>();//InventoryObserver(inv);
-    private int maxSize=16;
-    public void setMaxSize(int maxSize)
-    {
-        this.maxSize=maxSize;
+    private ArrayList<Item> items = new ArrayList<>();
+    private ArrayList<Gem> gems = new ArrayList<>();
+    private boolean duplicates = true;
+    private InventoryUpdater inv = new InventoryUpdater();
+    private ArrayList<InventoryObserver> collection = new ArrayList<>();//InventoryObserver(inv);
+    private int maxSize = 16;
+
+    public void setMaxSize(int maxSize) {
+        this.maxSize = maxSize;
     }
-    public boolean isMaxSize(int size)
-    {
-        return size>=maxSize;
+
+    public boolean isMaxSize(int size) {
+        return size >= maxSize;
     }
 
     public Inventory(ArrayList<Item> items, boolean duplicates) {
 
         this.items = items;
-        for(Item it:items)
-        {
+        for (Item it : items) {
             collection.add(new InventoryObserver(inv));
             inv.setItem(it);
         }
@@ -46,8 +45,8 @@ public class Inventory {
     public Inventory(ArrayList<Item> items) {
         this.items = items;
     }
-    public final int getSize()
-    {
+
+    public final int getSize() {
         return items.size();
     }
 
@@ -63,30 +62,27 @@ public class Inventory {
         this.gems = gems;
     }
 
-    public void addItem(Item it)
-    {
-        boolean exists=false;
-        if(duplicates)
+    public void addItem(Item it) {
+        boolean exists = false;
+        if (duplicates)
             items.add(it);
-        else{
-            for(Item i:items)
-            {
-                if(i.getName().equalsIgnoreCase(it.getName()))
-                {
-                    exists=true;
+        else {
+            for (Item i : items) {
+                if (i.getName().equalsIgnoreCase(it.getName())) {
+                    exists = true;
                 }
             }
-            if(!exists){
+            if (!exists) {
                 items.add(it);
                 collection.add(new InventoryObserver(inv));
                 inv.setItem(it);
             }
         }
     }
-    public void addGem(Gem g)
-    {
+
+    public void addGem(Gem g) {
         System.out.println("adding gem..");
-             gems.add(g);
+        gems.add(g);
 
     }
 

@@ -11,7 +11,7 @@ import MazeDecoration.TimeChallengeMaze;
 public class MazeFactory {
     private Thread mazeThread;
     private Thread styleThread;
-    private  MazeInterface maze=null;
+    private MazeInterface maze = null;
 
     public Thread getMazeThread() {
         return mazeThread;
@@ -33,124 +33,141 @@ public class MazeFactory {
         this.styleThread = styleThread;
     }
 
-    public MazeInterface makeMaze(MAZETYPE mazeType, GAMEMODES gameMode)
-    {
+    public MazeInterface makeMaze(MAZETYPE mazeType, GAMEMODES gameMode) {
 
 
-        switch(mazeType)
-        {
-            case SIMPLE: switch(gameMode){
-                case CLASSIC:{
-                    SimpleMaze style=new SimpleMaze();
-                    ClassicMazeDecorator game=new ClassicMazeDecorator(style);
-                    maze=game;
-                     mazeThread=new Thread(style);
-                    mazeThread.start();
-                     styleThread=new Thread(game);
-                    styleThread.start();
+        switch (mazeType) {
+            case SIMPLE:
+                switch (gameMode) {
+                    case CLASSIC: {
+                        SimpleMaze style = new SimpleMaze();
+                        ClassicMazeDecorator game = new ClassicMazeDecorator(style);
+                        maze = game;
+                        mazeThread = new Thread(style);
+                        mazeThread.start();
+                        styleThread = new Thread(game);
+                        styleThread.start();
 
 
-                }break;
-                case TIMECHALLENGE:{
-                    SimpleMaze style=new SimpleMaze();
-                    TimeChallengeMaze game=new TimeChallengeMaze(style);
-                    maze=game;
-                    mazeThread=new Thread(style);
-                    mazeThread.start();
-                    styleThread=new Thread(game);
-                    styleThread.start();
+                    }
+                    break;
+                    case TIMECHALLENGE: {
+                        SimpleMaze style = new SimpleMaze();
+                        TimeChallengeMaze game = new TimeChallengeMaze(style);
+                        maze = game;
+                        mazeThread = new Thread(style);
+                        mazeThread.start();
+                        styleThread = new Thread(game);
+                        styleThread.start();
 
 
-                }break;
-                case ITEMHUNTER:{
-                    SimpleMaze style=new SimpleMaze();
-                    ItemHunt game=new ItemHunt(style);
-                    maze=game;
-                    mazeThread=new Thread(style);
-                    mazeThread.start();
-                    styleThread=new Thread(game);
-                    styleThread.start();
+                    }
+                    break;
+                    case ITEMHUNTER: {
+                        SimpleMaze style = new SimpleMaze();
+                        ItemHunt game = new ItemHunt(style);
+                        maze = game;
+                        mazeThread = new Thread(style);
+                        mazeThread.start();
+                        styleThread = new Thread(game);
+                        styleThread.start();
 
 
-                }break;
-                default:break;
-            }break;
-            case MEDIUM: switch(gameMode){
-                case CLASSIC:{
-                    MediumMaze style=new MediumMaze();
-                    ClassicMazeDecorator game=new ClassicMazeDecorator(style);
-                    maze=game;
-                    mazeThread=new Thread(style);
-                    mazeThread.start();
-                    styleThread=new Thread(game);
-                    styleThread.start();
+                    }
+                    break;
+                    default:
+                        break;
+                }
+                break;
+            case MEDIUM:
+                switch (gameMode) {
+                    case CLASSIC: {
+                        MediumMaze style = new MediumMaze();
+                        ClassicMazeDecorator game = new ClassicMazeDecorator(style);
+                        maze = game;
+                        mazeThread = new Thread(style);
+                        mazeThread.start();
+                        styleThread = new Thread(game);
+                        styleThread.start();
 
 
-                }break;
-                case TIMECHALLENGE:{
-                    MediumMaze style=new MediumMaze();
-                    TimeChallengeMaze game=new TimeChallengeMaze(style);
-                    maze=game;
-                    mazeThread=new Thread(style);
-                    mazeThread.start();
-                    styleThread=new Thread(game);
-                    styleThread.start();
+                    }
+                    break;
+                    case TIMECHALLENGE: {
+                        MediumMaze style = new MediumMaze();
+                        TimeChallengeMaze game = new TimeChallengeMaze(style);
+                        maze = game;
+                        mazeThread = new Thread(style);
+                        mazeThread.start();
+                        styleThread = new Thread(game);
+                        styleThread.start();
 
 
-                }break;
-                case ITEMHUNTER:{
-                    MediumMaze style=new MediumMaze();
-                    ItemHunt game=new ItemHunt(style);
-                    maze=game;
-                    mazeThread=new Thread(style);
-                    mazeThread.start();
-                    styleThread=new Thread(game);
-                    styleThread.start();
+                    }
+                    break;
+                    case ITEMHUNTER: {
+                        MediumMaze style = new MediumMaze();
+                        ItemHunt game = new ItemHunt(style);
+                        maze = game;
+                        mazeThread = new Thread(style);
+                        mazeThread.start();
+                        styleThread = new Thread(game);
+                        styleThread.start();
 
 
-                }break;
+                    }
+                    break;
 
-                default:break;
+                    default:
+                        break;
 
-            }break;
-            case HARD: switch(gameMode){
-                case CLASSIC:{
-                    HardMaze style=new HardMaze();
-                    ClassicMazeDecorator game=new ClassicMazeDecorator(style);
-                    maze=game;
-                    mazeThread=new Thread(style);
-                    mazeThread.start();
-                    styleThread=new Thread(game);
-                    styleThread.start();
-
-
-                }break;
-                case TIMECHALLENGE:{
-                    HardMaze style=new HardMaze();
-                    TimeChallengeMaze game=new TimeChallengeMaze(style);
-                    maze=game;
-                    mazeThread=new Thread(style);
-                    mazeThread.start();
-                    styleThread=new Thread(game);
-                    styleThread.start();
+                }
+                break;
+            case HARD:
+                switch (gameMode) {
+                    case CLASSIC: {
+                        HardMaze style = new HardMaze();
+                        ClassicMazeDecorator game = new ClassicMazeDecorator(style);
+                        maze = game;
+                        mazeThread = new Thread(style);
+                        mazeThread.start();
+                        styleThread = new Thread(game);
+                        styleThread.start();
 
 
-                }break;
-                case ITEMHUNTER:{
-                    HardMaze style=new HardMaze();
-                    ItemHunt game=new ItemHunt(style);
-                    maze=game;
-                    mazeThread=new Thread(style);
-                    mazeThread.start();
-                    styleThread=new Thread(game);
-                    styleThread.start();
+                    }
+                    break;
+                    case TIMECHALLENGE: {
+                        HardMaze style = new HardMaze();
+                        TimeChallengeMaze game = new TimeChallengeMaze(style);
+                        maze = game;
+                        mazeThread = new Thread(style);
+                        mazeThread.start();
+                        styleThread = new Thread(game);
+                        styleThread.start();
 
 
-                }break;
+                    }
+                    break;
+                    case ITEMHUNTER: {
+                        HardMaze style = new HardMaze();
+                        ItemHunt game = new ItemHunt(style);
+                        maze = game;
+                        mazeThread = new Thread(style);
+                        mazeThread.start();
+                        styleThread = new Thread(game);
+                        styleThread.start();
 
-                default:break;
-            }break;
-            default:break;
+
+                    }
+                    break;
+
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
         }
 
         return maze;

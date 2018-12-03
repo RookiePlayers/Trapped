@@ -14,7 +14,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 public interface ItemInterface {
-    public  String getID();
+    public String getID();
 
     public String getName();
 
@@ -22,21 +22,19 @@ public interface ItemInterface {
 
     public Duration getTimeElapsedSincePickedUp(Instant timeNow);
 
-    public  Instant getTimePickedUp();
+    public Instant getTimePickedUp();
 
-    public  ItemStatus getstatus();
+    public ItemStatus getstatus();
 
     public void saveItem();
 
-    public  void showInfo();
+    public void showInfo();
 
     public Animation itemAnim(long ms);
 
-    public  Object use();
+    public Object use();
 
-    public   String getImage();
-
-
+    public String getImage();
 
 
 }

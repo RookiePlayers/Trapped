@@ -12,7 +12,7 @@ public class PositionedObstacle extends VBox {
 
     public PositionedObstacle(Obstacle obstacle) {
         this.obstacle = obstacle;
-        this.coordinates = new Coord(0,0);
+        this.coordinates = new Coord(0, 0);
 
         getChildren().addAll(obstacle);
         setAlignment(Pos.CENTER);
@@ -20,8 +20,9 @@ public class PositionedObstacle extends VBox {
         setTranslateX(coordinates.getX());
         setTranslateY(coordinates.getY());
         setMouseTransparent(false);
-        setMaxSize(Region.USE_PREF_SIZE,Region.USE_PREF_SIZE);
+        setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
     }
+
     public PositionedObstacle(Obstacle obstacle, Coord coordinates) {
         this.obstacle = obstacle;
         this.coordinates = coordinates;
@@ -31,7 +32,7 @@ public class PositionedObstacle extends VBox {
 
         setTranslateX(coordinates.getX());
         setTranslateY(coordinates.getY());
-        setMaxSize(Region.USE_PREF_SIZE,Region.USE_PREF_SIZE);
+        setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
     }
 
     public Obstacle getObstacle() {

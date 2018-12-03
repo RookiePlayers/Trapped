@@ -1,3 +1,3 @@
 package Maze;
 
-public enum MAZETYPE{HARD,MEDIUM,SIMPLE}
+public enum MAZETYPE {HARD, MEDIUM, SIMPLE}

@@ -6,24 +6,16 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 
 public class Player extends Actor {
-    private int health=100;
-    private ProgressBar healthbar;
+    private int health=3;
+    private long speed=2000;
 
 
-    public ProgressBar getHealthbar() {
-        return healthbar;
-    }
 
-    public void setHealthbar(ProgressBar healthbar) {
-        this.healthbar = healthbar;
-    }
 
-    private
-    Inventory inventory;
+    private Inventory inventory;
 
     public Player() {
-        healthbar=new ProgressBar();
-        healthbar.setProgress(health);
+
 
 
     }
@@ -34,15 +26,20 @@ public class Player extends Actor {
         super.url=url;
         this.health = health;
         this.inventory = inventory;
-        healthbar=new ProgressBar();
-        healthbar.setProgress(health);
+
     }
 
     public Player(int health, Inventory inventory) {
         this.health = health;
         this.inventory = inventory;
-        healthbar=new ProgressBar();
-        healthbar.setProgress(health);
+    }
+
+    public long getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(long speed) {
+        this.speed = speed;
     }
 
     public int getHealth() {
@@ -51,8 +48,7 @@ public class Player extends Actor {
 
     public void setHealth(int health) {
         this.health = health;
-        healthbar=new ProgressBar();
-        healthbar.setProgress(health);
+
     }
 
     public Inventory getInventory() {

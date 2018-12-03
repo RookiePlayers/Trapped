@@ -2,12 +2,12 @@ package Maze;
 
 //import trappedGame.mainScreen;
 
+import Maze.MazeDifficulty.Coord;
+import Maze.MazeDifficulty.PositionedItem;
 import inventory.Models.*;
-import inventory.UI.InventoryUI;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 
 import javafx.event.EventHandler;

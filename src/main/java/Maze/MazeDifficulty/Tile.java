@@ -1,17 +1,16 @@
-package Maze;
+package Maze.MazeDifficulty;
 
-import inventory.Models.Item;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
+import inventory.Models.Gem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-enum TILETYPE{T1,T2,T3,T4,T5,T6,T7,T8,T9,GOAL,GOALA,GOALB,BLOCKED}
+enum TILETYPE{T1,T2,T3,T4,T5,T6,T7,T8,T9,T10,T11,T12,T13,T14,T15,T16,GOAL,GOALA,GOALB,BLOCKED}
 public class Tile extends StackPane {
     //private Item item;
     private Map<String,Tile> exits=new HashMap<>();
@@ -20,16 +19,48 @@ public class Tile extends StackPane {
     private String path="/Images/";
     private String ID="a";
     private boolean moveAble=true;
+    private boolean trap=false;
+    private boolean trapper=false;
     private TILETYPE tileType=TILETYPE.T4;
     private final ImageView tileImg=new ImageView();
-    public static TILETYPE original_TileType;
-
+    private  TILETYPE original_TileType;
+    private  ArrayList<Gem> gems=new ArrayList<>();
     public TILETYPE getTileType() {
         return tileType;
     }
 
     public void setTileType(TILETYPE tileType) {
         this.tileType = tileType;
+
+    }
+
+    public boolean isTrapper() {
+        return trapper;
+    }
+
+    public void setTrapper(boolean trapper) {
+        this.trapper = trapper;
+    }
+
+    public boolean isTrap(Tile t) {
+        System.out.println("Are you a trapper? "+t.isTrapper());
+        System.out.println("Am I Trapped? "+trap);
+        if(t.isTrapper()&&trap)
+        return true;
+        else return false;
+    }
+
+    public void setTrap(boolean trap) {
+        this.trap = trap;
+    }
+
+    public TILETYPE getOriginal_TileType() {
+        return original_TileType;
+    }
+
+    public void setOriginal_TileType(TILETYPE original_TileType) {
+        this.original_TileType = original_TileType;
+        this.tileType=original_TileType;
     }
 
     public boolean isMoveAble() {
@@ -69,11 +100,17 @@ public class Tile extends StackPane {
         getChildren().remove(item);
 
     }
-    public void addObstacle(PositionedObstacle obstacle,TILETYPE t)
+    public void addObstacle(PositionedObstacle obstacle, TILETYPE t)
     {
         getChildren().add(obstacle);
 
         this.tileType=t;
+
+    }
+    public void addObstacle(PositionedObstacle obstacle)
+    {
+        getChildren().add(obstacle);
+
 
     }
     public void removeObstacle(PositionedObstacle obstacle)
@@ -85,6 +122,7 @@ public class Tile extends StackPane {
     public Map<String, Tile> getExits() {
         return exits;
     }
+
 
     public void setExits(Tile north,Tile east,Tile south,Tile west)
     {
@@ -133,6 +171,24 @@ public class Tile extends StackPane {
         {
             this.tileType=TILETYPE.T9;
         }
+        else if(east!=null&&south!=null&&north==null&&west==null)
+        {
+            this.tileType=TILETYPE.T10;
+        }
+        else if(east!=null&&south==null&&north!=null&&west==null)
+        {
+            this.tileType=TILETYPE.T11;
+        }
+        else if(east==null&&south==null&&north!=null&&west!=null)
+        {
+            this.tileType=TILETYPE.T12;
+        }
+        else if(east==null&&south==null&&north!=null&&west==null)
+        {
+            this.tileType=TILETYPE.T13;
+        }
+
+
         else if(east!=null&&west!=null&&north==null&&south==null)
         {
             this.tileType=TILETYPE.GOAL;
@@ -158,6 +214,9 @@ public class Tile extends StackPane {
 
     public ArrayList<PositionedItem> getItemsInRoom() {
         return itemsInRoom;
+    }
+    public ArrayList<Gem> getGems() {
+        return gems;
     }
 
     public void setItemsInRoom(ArrayList<PositionedItem> itemsInRoom) {

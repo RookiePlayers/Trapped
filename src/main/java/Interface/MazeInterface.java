@@ -20,7 +20,10 @@ public interface MazeInterface {
 
     BorderPane initMaze(Scene scene, InventoryUI inventoryMenu, Label invLabel, Item item, Player player, ArrayList<Item> items, Inventory inventory);
      void startMaze(Scene scene);
+     void resetMaze();
      Item itemGenerator();
+     boolean hasStarted();
+     void setStop(boolean thread);
 
 
 

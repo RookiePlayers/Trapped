@@ -8,23 +8,23 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
-public class TimeFreeze extends Item {
+public class TrapBreaker extends Item {
 
     private double width;
     private double height;
     private boolean playAnimation = false;
     private Animation animation;
-    private long freezeLength = 20000;
+  
 
-    public TimeFreeze() {
-        super("TIME", "TimeFreeze", "Time Freeze 20 sec", "Freezes Time", ItemStatus.NEW);
+    public TrapBreaker() {
+        super("TB", "TrapBreaker", "Time Freeze 20 sec", "Freezes Time", ItemStatus.NEW);
         this.width = 20;
         this.height = width + 30.0;
 
     }
 
-    public TimeFreeze(double width, double height, boolean playAnimation) {
-        super("TIME", "TimeFreeze", "Time Freeze 20 sec", "Freezes Time", ItemStatus.NEW);
+    public TrapBreaker(double width, double height, boolean playAnimation) {
+        super("TB", "TrapBreaker", "Time Freeze 20 sec", "Freezes Time", ItemStatus.NEW);
         this.playAnimation = playAnimation;
         this.width = width;
         this.height = height;
@@ -32,8 +32,8 @@ public class TimeFreeze extends Item {
         initSP();
     }
 
-    public TimeFreeze(String id, String name, String description, boolean playAnimation) {
-        super("TIME", id, name, description, ItemStatus.NEW);
+    public TrapBreaker(String id, String name, String description, boolean playAnimation) {
+        super("TB", id, name, description, ItemStatus.NEW);
         this.playAnimation = playAnimation;
         this.width = 20;
         this.height = width + 30.0;
@@ -41,8 +41,8 @@ public class TimeFreeze extends Item {
         initSP();
     }
 
-    public TimeFreeze(String id, String name, String description, double width, double height, boolean playAnimation, int freezeLength) {
-        super("TIME", id, name, description, ItemStatus.NEW);
+    public TrapBreaker(String id, String name, String description, double width, double height, boolean playAnimation, int freezeLength) {
+        super("TB", id, name, description, ItemStatus.NEW);
         this.playAnimation = playAnimation;
         this.width = width;
         this.height = height;
@@ -57,7 +57,7 @@ public class TimeFreeze extends Item {
         imageView.setFitWidth(width / 2);
         imageView.setFitHeight(height / 2);
         setGraphic(imageView);
-        setText(freezeLength + "");
+      
         setTextFill(Color.WHITE);
 
         //setText(id);
@@ -87,7 +87,7 @@ public class TimeFreeze extends Item {
 
     @Override
     public Object use() {
-        long usage = freezeLength;
+        long usage = 0;
         return usage;
     }
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Inventory {
   private  ArrayList<Item> items=new ArrayList<>();
+    private ArrayList<Gem>gems =new ArrayList<>();
   private boolean duplicates=true;
     private InventoryUpdater inv=new InventoryUpdater();
     private ArrayList<InventoryObserver> collection=new ArrayList<>();//InventoryObserver(inv);
@@ -53,6 +54,15 @@ public class Inventory {
     public ArrayList<Item> getItems() {
         return items;
     }
+
+    public ArrayList<Gem> getGems() {
+        return gems;
+    }
+
+    public void setGems(ArrayList<Gem> gems) {
+        this.gems = gems;
+    }
+
     public void addItem(Item it)
     {
         boolean exists=false;
@@ -72,6 +82,12 @@ public class Inventory {
                 inv.setItem(it);
             }
         }
+    }
+    public void addGem(Gem g)
+    {
+        System.out.println("adding gem..");
+             gems.add(g);
+
     }
 
     public void setItems(ArrayList<Item> items) {

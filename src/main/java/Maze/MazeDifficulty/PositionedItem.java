@@ -1,4 +1,4 @@
-package Maze;
+package Maze.MazeDifficulty;
 
 import inventory.Models.Item;
 import javafx.geometry.Pos;
@@ -51,5 +51,9 @@ public class PositionedItem extends VBox {
 
     public void setCoordinates(Coord coordinates) {
         this.coordinates = coordinates;
+
+        setTranslateX(coordinates.getX());
+        setTranslateY(coordinates.getY());
     }
+
 }

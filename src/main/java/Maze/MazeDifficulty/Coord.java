@@ -1,4 +1,4 @@
-package Maze;
+package Maze.MazeDifficulty;
 
 public class Coord
 {

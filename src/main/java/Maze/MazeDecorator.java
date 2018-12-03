@@ -1,6 +1,7 @@
 package Maze;
 
 import Interface.MazeInterface;
+import Maze.MazeDifficulty.Maze;
 import inventory.Models.Inventory;
 import inventory.Models.Item;
 import inventory.UI.InventoryUI;

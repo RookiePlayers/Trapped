@@ -221,7 +221,7 @@ public class InventoryUI extends Stage {
                 }
                 break;
                 case "HP": {
-                    HealthPotion hp = new HealthPotion(inventory.getItems().get(i).getID(), inventory.getItems().get(i).getName(), inventory.getItems().get(i).getDescription(), 50, 60, false, 50);
+                    HealthPotion hp = new HealthPotion(inventory.getItems().get(i).getID(), inventory.getItems().get(i).getName(), inventory.getItems().get(i).getDescription(), 50, 60, false, 1);
                     hp.setTimePickedUp(inventory.getItems().get(i).getTimePickedUp());
                     label.setText(hp.getID());
                     panels[i].getChildren().addAll(hp, label);
@@ -239,7 +239,7 @@ public class InventoryUI extends Stage {
                 }
                 break;
                 case "SP": {
-                    SpeedPotion sp = new SpeedPotion(inventory.getItems().get(i).getID(), inventory.getItems().get(i).getName(), inventory.getItems().get(i).getDescription(), 50, 60, false, 50);
+                    SpeedPotion sp = new SpeedPotion(inventory.getItems().get(i).getID(), inventory.getItems().get(i).getName(), inventory.getItems().get(i).getDescription(), 50, 60, false, 1);
                     sp.setTimePickedUp(inventory.getItems().get(i).getTimePickedUp());
                     label.setText(sp.getID());
                     panels[i].getChildren().addAll(sp, label);
@@ -257,7 +257,7 @@ public class InventoryUI extends Stage {
                 }
                 break;
                 case "TIME": {
-                    TimeFreeze time = new TimeFreeze(inventory.getItems().get(i).getID(), inventory.getItems().get(i).getName(), inventory.getItems().get(i).getDescription(), 50, 60, false, 50);
+                    TimeFreeze time = new TimeFreeze(inventory.getItems().get(i).getID(), inventory.getItems().get(i).getName(), inventory.getItems().get(i).getDescription(), 50, 60, false, 20000);
                     time.setTimePickedUp(inventory.getItems().get(i).getTimePickedUp());
                     label.setText(time.getID());
                     panels[i].getChildren().addAll(time, label);
@@ -270,6 +270,24 @@ public class InventoryUI extends Stage {
                     time.setOnMouseClicked(m -> {
                         if (m.getButton() == MouseButton.SECONDARY)
                             time.showInfo();
+                    });
+
+                }
+                break;
+                case "TB": {
+                    TrapBreaker tb = new TrapBreaker(inventory.getItems().get(i).getID(), inventory.getItems().get(i).getName(), inventory.getItems().get(i).getDescription(), 50, 60, false, 0);
+                    tb.setTimePickedUp(inventory.getItems().get(i).getTimePickedUp());
+                    label.setText(tb.getID());
+                    panels[i].getChildren().addAll(tb, label);
+                    tb.setId(i + "");
+                    tb.setOnAction(e -> {
+                        useItem = tb;
+
+                        addPanelOperation(e);
+                    });
+                    tb.setOnMouseClicked(m -> {
+                        if (m.getButton() == MouseButton.SECONDARY)
+                            tb.showInfo();
                     });
 
                 }

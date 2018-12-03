@@ -1,4 +1,4 @@
-package Maze;
+package Maze.MazeDifficulty;
 
 import inventory.Models.Obstacle;
 import javafx.geometry.Pos;

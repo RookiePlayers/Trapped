@@ -1,6 +1,40 @@
 .background{
- -fx-background-color:rgb(32, 22, 9);
-    -fx-border-color:rgb(26, 21, 11);
+ -fx-background-color:radial-gradient(focus-distance 0% , center 50% 50% , radius 55% , rgb(52, 80, 82), #000000);
     -fx-border-width:5px;
+}
+.play{
+    -fx-min-width: 130px;      
+     -fx-min-height: 80px;  
+     -fx-max-width: 300px;  
+     -fx-max-height: 135px;
+     -fx-background-color: transparent;
+     -fx-border-width:5px;
+     -fx-border-color:  rgb(82, 170, 32);
+     -fx-border-radius: 1.5em;
+     -fx-font-size:24px;
+     -fx-font-family: cambria;
+     -fx-text-fill:white;
+}
+.play:hover{
+    -fx-background-radius: 1.5em;
+    -fx-background-color:rgb(82, 170, 32)
+}
+.leaderboard
+{
+    -fx-min-width: 130px;      
+     -fx-min-height: 80px;  
+     -fx-max-width: 300px;  
+     -fx-max-height: 135px;
+     -fx-background-color: transparent;
+     -fx-border-width:5px;
+     -fx-border-color:  rgb(247, 230, 0);
+     -fx-border-radius: 1.5em;
+     -fx-font-size:24px;
+     -fx-font-family: cambria;
+     -fx-text-fill:white;
+}
+.leaderboard:hover{
+    -fx-background-radius: 1.5em;
+    -fx-background-color:rgb(247, 230, 0)
 }
 

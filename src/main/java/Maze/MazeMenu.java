@@ -16,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -144,7 +146,9 @@ public class MazeMenu extends Stage  {
         bottom=new HBox();
         ((HBox) bottom).getChildren().addAll();
 
-        Scene scene=new Scene(borderPane);
+        VBox vv=new VBox();
+        vv.getChildren().add(borderPane);
+        Scene scene=new Scene(vv);
         setScene(scene);
         System.out.println(player.getName());
 
@@ -167,6 +171,7 @@ public class MazeMenu extends Stage  {
 
 
         scene.getStylesheets().add(getClass().getResource("/css/bag.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/css/gameScreen.css").toExternalForm());
         ImageView inventory_img = new ImageView(new Image(getClass().getResourceAsStream("/Images/inventory.png")));
         inventory_img.setFitHeight(60);
         inventory_img.setFitWidth(70);
@@ -188,6 +193,9 @@ public class MazeMenu extends Stage  {
             System.out.println("After: " + item);
         });
     ((HBox) top).getChildren().add(box);
+invLabel.setTextFill(Color.WHITE);
+    vv.getStyleClass().add("background");
+
 
     }
 

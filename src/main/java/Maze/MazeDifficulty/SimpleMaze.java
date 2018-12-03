@@ -206,6 +206,7 @@ public void setup()
         hbox.setAlignment(Pos.CENTER);
         hbox.setSpacing(25);
         window.setTop(hbox);
+
         return window;
 }
 
@@ -463,9 +464,10 @@ private void addDoor(Door door, PositionedObstacle obs, Tile t, TILETYPE newT)
                     @Override
                     public void run() {
                         window.setLeft(timeLabel);
-                        timeLabel.setFont(new Font(32));
+
                         if(time<5000)
-                            timeLabel.setTextFill(Color.RED);
+                            timeLabel.setFont(new Font(72));
+                        timeLabel.setTextFill(Color.WHITE);                            timeLabel.setTextFill(Color.RED);
                         if(time==0)
                             timeLabel.setText("");
 

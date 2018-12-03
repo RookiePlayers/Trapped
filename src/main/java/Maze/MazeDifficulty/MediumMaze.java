@@ -535,7 +535,8 @@ public class MediumMaze extends Maze {
                     @Override
                     public void run() {
                         window.setLeft(timeLabel);
-                        timeLabel.setFont(new Font(32));
+                        timeLabel.setFont(new Font(72));
+                        timeLabel.setTextFill(Color.WHITE);
                         if(time<5000)
                             timeLabel.setTextFill(Color.RED);
                         if(time==0)

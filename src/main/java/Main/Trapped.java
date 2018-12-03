@@ -1,11 +1,11 @@
 package Main;//import java.-classpath.Trapped.Main.Trapped;
 //import java.-classpath.trappedGame.simpleMaze;
 
-import Leaderboard.UI.LeaderBoardOptions;
-import Leaderboard.UI.LeaderboardGUI;
+import Leaderboard.UI.*;
+import Leaderboard.*;
 import Maze.*;
-import Maze.MazeMenu;
 import inventory.Models.*;
+import inventory.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,7 +19,7 @@ import javafx.scene.image.Image;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
-import Maze.simpleMaze2;
+
 
 import java.util.ArrayList;
 
@@ -70,7 +70,7 @@ public class Trapped extends Stage
 		VBox mainVBox=new VBox();
 		mainVBox.setPadding(new Insets(20));
 		mainVBox.setAlignment(Pos.CENTER);
-		mainVBox.setSpacing(5);
+		mainVBox.setSpacing(15);
 
         scene = new Scene(mainVBox);
         scene.setFill(Color.WHITE);
@@ -78,9 +78,10 @@ public class Trapped extends Stage
 
 
         Button b1 = new Button("Play");
-       	b1.setStyle("-fx-border-color: blue;");
+     
 		b1.setMinWidth(120);
 		b1.setMinHeight(20);
+		b1.getStyleClass().add("play");
 
 		b1.setOnAction(e -> {
 			close();
@@ -92,10 +93,11 @@ public class Trapped extends Stage
 
 
 		Button b2 = new Button("Leaderboards");
-		b2.setStyle("-fx-border-color: blue;");
+	
 		b2.setMinWidth(120);
 		b2.setMinHeight(20);
 		b2.setOnAction(e -> new LeaderBoardOptions().showAndWait());
+		b2.getStyleClass().add("leaderboard");
 
 		Image logo = new Image(getClass().getResourceAsStream("/Images/maze.png"));
 		ImageView imageView = new ImageView(logo);
@@ -186,25 +188,29 @@ class GameType extends Stage
 		VBox box=new VBox();
 
 		Button classicMaze=new Button("CLASSIC");
+		classicMaze.getStyleClass().add("classic");
 		Button timeTrial=new Button("TIME TRIAL");
-		Button itemHunter=new Button("ItemHunter");
+		timeTrial.getStyleClass().add("tt");
 
+		Button itemHunter=new Button("ItemHunter");
+		itemHunter.getStyleClass().add("ih");
 		classicMaze.setOnAction(
 				e->{
-					setScene(gameDifficulty());
 					gamemodes=GAMEMODES.CLASSIC;
+					setScene(gameDifficulty());
+
 				}
 		);
 		timeTrial.setOnAction(
-				e->{
+				e->{gamemodes=GAMEMODES.TIMECHALLENGE;
 					setScene(gameDifficulty());
-					gamemodes=GAMEMODES.TIMECHALLENGE;
+
 				}
 		);
 		itemHunter.setOnAction(
-				e->{
+				e->{gamemodes=GAMEMODES.ITEMHUNTER;
 					setScene(gameDifficulty());
-					gamemodes=GAMEMODES.ITEMHUNTER;
+
 				}
 		);
 
@@ -212,10 +218,14 @@ class GameType extends Stage
 		box.setAlignment(Pos.CENTER);
 		box.setSpacing(15);
 		borderPane.setCenter(box);
+		mainMenu.getStyleClass().add("mm");
+		box.getStyleClass().add("background");
 
 
 
 		Scene sc=new Scene(borderPane);
+		sc.getStylesheets().add(getClass().getResource("/css/gameMode.css").toExternalForm());
+
 
 		return sc;
 	}
@@ -228,7 +238,12 @@ class GameType extends Stage
 		Button intermediateMaze=new Button("Intermediate");
 		Button easyMaze=new Button("Easy");
 
+		hardMaze.getStyleClass().add("h");
+		easyMaze.getStyleClass().add("e");
+		intermediateMaze.getStyleClass().add("m");
+
 		hardMaze.setOnAction(e->{
+			close();
 			mazetype=MAZETYPE.HARD;
 			MazeMenu mazemenu=new MazeMenu(inventory,mazetype,gamemodes);
 
@@ -239,6 +254,7 @@ class GameType extends Stage
 
 		});
 		intermediateMaze.setOnAction(e->{
+			close();
 			mazetype=MAZETYPE.MEDIUM;
 			MazeMenu mazemenu=new MazeMenu(inventory,mazetype,gamemodes);
 
@@ -248,6 +264,7 @@ class GameType extends Stage
 			mazemenu.showAndWait();
 		});
 		easyMaze.setOnAction(e->{
+			close();
 			mazetype=MAZETYPE.SIMPLE;
 			MazeMenu mazemenu=new MazeMenu(inventory,mazetype,gamemodes);
 
@@ -268,6 +285,17 @@ class GameType extends Stage
 		borderPane.setCenter(box);
 
 		Scene sc=new Scene(borderPane);
+		sc.getStylesheets().add(getClass().getResource("/css/gameDifficulty.css").toExternalForm());
+		switch(gamemodes)
+		{
+			case CLASSIC:box.getStyleClass().add("background1");break;
+			case ITEMHUNTER:box.getStyleClass().add("background3");break;
+			case TIMECHALLENGE:box.getStyleClass().add("background2");break;
+
+
+		}
+		backBtn.getStyleClass().add("mm");
+
 		return sc;
 	}
 }

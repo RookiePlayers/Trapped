@@ -26,7 +26,7 @@ public class LeaderBoardOptions extends Stage {
         VBox box=new VBox();
         box.setPadding(new Insets(20));
         box.setSpacing(15);
-        Label title=new Label("LEADERBARDS");
+        Label title=new Label("TOP PLAYERS");
         Button ihl=new Button("Item Hunters (LB)");
         Button clb=new Button("\"Classic\" Leaderboard");
         Button tclb=new Button("Time Challengers (LB)");
@@ -51,6 +51,12 @@ public class LeaderBoardOptions extends Stage {
         });
 
         Scene sc=new Scene(borderPane,800,800);
+        sc.getStylesheets().add(getClass().getResource("/css/gameMode.css").toExternalForm());
+        ihl.getStyleClass().add("ih");
+        clb.getStyleClass().add("classic");
+        tclb.getStyleClass().add("tt");
+        title.getStyleClass().add("title");
+        box.getStyleClass().add("background");
         return sc;
 
     }

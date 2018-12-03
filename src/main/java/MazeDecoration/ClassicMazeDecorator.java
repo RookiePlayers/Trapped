@@ -62,7 +62,7 @@ public  class ClassicMazeDecorator  extends MazeDecorator implements  Runnable{
         this.item=item;
         timerLabel=new Label();
         timerLabel.setFont(new Font(24));
-        timerLabel.setTextFill(Color.BLACK);
+        timerLabel.setTextFill(Color.WHITE);
         System.out.println("INITIALIZING MASE AT CLASSIC ");
          window=maze.initMaze(scene,inventoryMenu,invLabel,item,player,items,inventory);
         timerLabel.setText("0 sec");
@@ -70,7 +70,9 @@ public  class ClassicMazeDecorator  extends MazeDecorator implements  Runnable{
         box.setAlignment(Pos.CENTER);
         box.setSpacing(20.0);
         box.setPadding(new Insets(12.0));
-        box.getChildren().addAll(new Label("Time Elapsed: "),timerLabel);
+        Label l=new Label("Time Elapsed: ");
+        box.getChildren().addAll(l,timerLabel);
+        l.setTextFill(Color.WHITE);
 
 
 
@@ -93,6 +95,9 @@ public  class ClassicMazeDecorator  extends MazeDecorator implements  Runnable{
         hbox.setSpacing(25);
         window.setTop(hbox);
          timer = new Timer(timerLabel);
+         consumeButton.getStyleClass().add("consume");
+         returnButton.getStyleClass().add("drop");
+
         return window;
     }
     public void startMaze(Scene scene)

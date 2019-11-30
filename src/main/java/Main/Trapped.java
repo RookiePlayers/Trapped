@@ -2,10 +2,8 @@ package Main;//import java.-classpath.Trapped.Main.Trapped;
 //import java.-classpath.trappedGame.simpleMaze;
 
 import Leaderboard.UI.*;
-import Leaderboard.*;
 import Maze.*;
 import inventory.Models.*;
-import inventory.*;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -225,8 +223,8 @@ class GameType extends Stage {
         box.getStyleClass().add("background");
 
 
-        Scene sc = new Scene(borderPane);
-        sc.getStylesheets().add(getClass().getResource("/css/gameMode.css").toExternalForm());
+        Scene sc = new Scene(borderPane);//gameType
+        sc.getStylesheets().add(getClass().getResource("/css/Trapped.css").toExternalForm());
 
 
         return sc;
@@ -310,8 +308,8 @@ class GameType extends Stage {
         box.setSpacing(15);
         borderPane.setCenter(box);
 
-        Scene sc = new Scene(borderPane);
-        sc.getStylesheets().add(getClass().getResource("/css/gameDifficulty.css").toExternalForm());
+        Scene sc = new Scene(borderPane);//gameDifficulty
+        sc.getStylesheets().add(getClass().getResource("/css/Trapped.css").toExternalForm());
         switch (gamemodes) {
             case CLASSIC:
                 box.getStyleClass().add("background1");

@@ -84,6 +84,7 @@ public class Tile extends StackPane {
     public Tile(String image, String ID) {
         this.image = image;
         this.ID = ID;
+        System.out.println(image);
         tileImg.setImage(new Image(getClass().getResourceAsStream(path + image)));
         getChildren().add(tileImg);
 

@@ -1,4 +1,4 @@
-package Maze;
+ package Maze;
 
 import Interface.MazeInterface;
 import Maze.MazeDifficulty.Maze;

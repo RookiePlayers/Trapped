@@ -50,6 +50,7 @@ public class TrapBreaker extends Item {
     }
 
     public void initSP() {
+        System.out.println(ID.toLowerCase());
         Image image = new Image(getClass().getResourceAsStream("/Images/" + ID.toLowerCase() + ".png"));
 
         ImageView imageView = new ImageView(image);
